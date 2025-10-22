@@ -1130,6 +1130,12 @@
         submitBtn.textContent = 'Submit Application';
         }
     });
+            // يسجّل كل زيارة جديدة
+    try {
+    addDoc(collection(db, "visits"), { timestamp: new Date(), userAgent: navigator.userAgent });
+    } catch (e) {
+    console.log("Visit log failed:", e);
+    }
     </script>
 
 </body>
