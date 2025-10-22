@@ -107,6 +107,14 @@
       margin-top: 1rem;
     }
 
+    .admin-logs {
+      background: rgba(75, 0, 130, 0.3);
+      padding: 1rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      display: none;
+    }
+
     #errorMsg {
       color: red;
       margin-top: 1rem;
@@ -133,17 +141,25 @@
 
     <input type="text" id="searchInput" placeholder="🔍 Search by name, email, major or skill...">
     <button id="downloadBtn">⬇️ Download CSV</button>
+    <button id="logsBtn" style="display:none;">📜 View Admin Logs</button>
 
     <table id="appTable">
       <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>
     </table>
+
+    <div class="admin-logs" id="adminLogs">
+      <h3>Admin Login Activity</h3>
+      <table id="logsTable">
+        <tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>
+      </table>
+    </div>
 
     <button class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, addDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -159,7 +175,7 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    const ADMIN_EMAIL = "admin@csquare3.club";
+    const SUPER_ADMIN = "admin@csquare3.club";
 
     const loginBox = document.getElementById('loginBox');
     const dashboard = document.getElementById('dashboard');
@@ -171,6 +187,9 @@
     const table = document.getElementById("appTable");
     const downloadBtn = document.getElementById('downloadBtn');
     const searchInput = document.getElementById('searchInput');
+    const logsBtn = document.getElementById('logsBtn');
+    const adminLogs = document.getElementById('adminLogs');
+    const logsTable = document.getElementById('logsTable');
 
     loginBtn.addEventListener('click', async () => {
       const email = document.getElementById('adminEmail').value.trim();
@@ -180,21 +199,25 @@
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Only allow admin
-        if (user.email !== ADMIN_EMAIL) {
-          await signOut(auth);
-          errorMsg.textContent = 'Access denied ❌ You are not authorized.';
-          return;
+        // الحصول على IP العام
+        let ipAddress = "Unknown";
+        try {
+          const response = await fetch("https://api.ipify.org?format=json");
+          const data = await response.json();
+          ipAddress = data.ip;
+        } catch (e) {
+          console.warn("IP fetch failed", e);
         }
 
+        // سجل الدخول لأي حساب Admin
         await addDoc(collection(db, "admin_logs"), {
           email: user.email,
+          ip: ipAddress,
           timestamp: new Date(),
           userAgent: navigator.userAgent
         });
 
         errorMsg.textContent = '';
-
       } catch (error) {
         errorMsg.textContent = 'Invalid credentials ❌';
       }
@@ -207,9 +230,14 @@
     });
 
     onAuthStateChanged(auth, async (user) => {
-      if (user && user.email === ADMIN_EMAIL) {
+      if (user) {
         loginBox.style.display = 'none';
         dashboard.style.display = 'block';
+
+        if (user.email === SUPER_ADMIN) {
+          logsBtn.style.display = 'inline-block';
+        }
+
         await loadApplications();
         await loadVisits();
       } else {
@@ -281,6 +309,25 @@
       a.download = "applications.csv";
       a.click();
       URL.revokeObjectURL(url);
+    });
+
+    // تحميل السجل (للسوبر أدمن فقط)
+    logsBtn.addEventListener('click', async () => {
+      const q = query(collection(db, "admin_logs"), orderBy("timestamp", "desc"));
+      const logsSnapshot = await getDocs(q);
+      logsTable.innerHTML = '<tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>';
+      logsSnapshot.forEach(doc => {
+        const l = doc.data();
+        const date = new Date(l.timestamp.seconds * 1000).toLocaleString();
+        const row = logsTable.insertRow();
+        row.innerHTML = `
+          <td>${l.email}</td>
+          <td>${l.ip || "N/A"}</td>
+          <td>${date}</td>
+          <td>${l.userAgent}</td>
+        `;
+      });
+      adminLogs.style.display = 'block';
     });
   </script>
 </body>
