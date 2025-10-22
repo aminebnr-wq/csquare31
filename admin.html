@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CSQUARE³ Admin Dashboard</title>
   <style>
+    :root {
+      --deep-purple: #231123;
+      --violet: #c30f45;
+      --dark-purple: #150a17;
+      --accent-pink: #c30f45;
+      --light-pink: #e64f7a;
+      --bg-dark: #0b0610;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: #0b001a;
+      background: var(--bg-dark);
       color: #fff;
       margin: 0;
       padding: 0;
@@ -15,31 +24,31 @@
 
     .login-box, .dashboard {
       max-width: 420px;
-      background: rgba(75, 0, 130, 0.2);
-      border: 1px solid #9B59B6;
+      background: rgba(35, 17, 35, 0.5);
+      border: 1px solid var(--violet);
       padding: 2rem;
       border-radius: 20px;
-      box-shadow: 0 0 30px rgba(155, 89, 182, 0.5);
+      box-shadow: 0 0 30px rgba(195, 15, 69, 0.3);
       text-align: center;
       margin: 8% auto;
       transition: 0.3s;
     }
 
-    h2 { color: #FF7A00; }
+    h2 { color: var(--accent-pink); }
 
     input {
       width: 90%;
       padding: 1rem;
       margin: 1rem 0;
       border-radius: 10px;
-      border: 2px solid #9B59B6;
-      background: #150028;
+      border: 2px solid var(--violet);
+      background: #1b0b1c;
       color: #fff;
       font-size: 1rem;
     }
 
     button {
-      background: linear-gradient(135deg, #4B0082, #9B59B6);
+      background: linear-gradient(135deg, var(--deep-purple), var(--violet));
       color: #fff;
       border: none;
       padding: 0.8rem 2rem;
@@ -50,15 +59,22 @@
       margin-top: 0.5rem;
     }
 
-    button:hover { background: #FF7A00; box-shadow: 0 0 20px #FF7A00; }
+    button:hover {
+      background: var(--accent-pink);
+      box-shadow: 0 0 20px var(--accent-pink);
+    }
 
-    .dashboard { max-width: 1100px; margin-top: 4rem; padding: 2rem 3rem; }
+    .dashboard {
+      max-width: 1100px;
+      margin-top: 4rem;
+      padding: 2rem 3rem;
+    }
 
     .stats {
       display: flex;
       justify-content: space-around;
-      background: rgba(255, 122, 0, 0.15);
-      border: 1px solid #FF7A00;
+      background: rgba(195, 15, 69, 0.15);
+      border: 1px solid var(--accent-pink);
       border-radius: 15px;
       padding: 1rem;
       margin-bottom: 1rem;
@@ -69,27 +85,30 @@
       width: 100%;
       padding: 0.8rem;
       border-radius: 10px;
-      border: 2px solid #9B59B6;
-      background: #150028;
+      border: 2px solid var(--violet);
+      background: #1b0b1c;
       color: #fff;
       margin-bottom: 1rem;
     }
 
-    .tabs { display: flex; gap: 10px; margin-bottom: 1rem; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 1rem; flex-wrap: wrap; }
 
     .tab-btn {
       flex: 1;
       padding: 0.5rem;
       border-radius: 10px;
       cursor: pointer;
-      border: 1px solid #9B59B6;
-      background: rgba(75,0,130,0.2);
+      border: 1px solid var(--violet);
+      background: rgba(35,17,35,0.5);
       color: #fff;
       font-weight: 600;
       transition: 0.3s;
     }
 
-    .tab-btn.active { background: #FF7A00; color: #000; }
+    .tab-btn.active {
+      background: var(--accent-pink);
+      color: #000;
+    }
 
     .table-container {
       width: 100%;
@@ -105,14 +124,16 @@
     }
 
     th, td {
-      border: 1px solid #9B59B6;
+      border: 1px solid var(--violet);
       padding: 0.7rem;
       text-align: left;
       font-size: 0.9rem;
       white-space: nowrap;
     }
 
-    th { background: rgba(155, 89, 182, 0.3); }
+    th {
+      background: rgba(195, 15, 69, 0.25);
+    }
 
     td button {
       margin: 0 2px;
@@ -124,7 +145,7 @@
     .logout-btn { background: crimson; margin-top: 1rem; }
 
     .admin-logs, .app-logs {
-      background: rgba(75, 0, 130, 0.3);
+      background: rgba(35,17,35,0.4);
       padding: 1rem;
       border-radius: 15px;
       margin-top: 2rem;
@@ -142,7 +163,6 @@
   </style>
 </head>
 <body>
-  <!-- LOGIN -->
   <div class="login-box" id="loginBox">
     <h2>Admin Login</h2>
     <input type="email" id="adminEmail" placeholder="Email">
@@ -151,7 +171,6 @@
     <p id="errorMsg"></p>
   </div>
 
-  <!-- DASHBOARD -->
   <div class="dashboard" id="dashboard" style="display:none;">
     <h2>CSQUARE³ Admin Dashboard</h2>
     <div class="stats">
@@ -226,232 +245,54 @@
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     const errorMsg = document.getElementById('errorMsg');
-    const countEl = document.getElementById('count');
-    const visitsEl = document.getElementById('visitsCount');
-    const table = document.getElementById("appTable");
-    const downloadBtn = document.getElementById('downloadBtn');
-    const searchInput = document.getElementById('searchInput');
     const logsBtn = document.getElementById('logsBtn');
     const appLogsBtn = document.getElementById('appLogsBtn');
-    const adminLogs = document.getElementById('adminLogs');
-    const logsTable = document.getElementById('logsTable');
-    const appLogs = document.getElementById('appLogs');
-    const appLogsTable = document.getElementById('appLogsTable');
-    const tabButtons = document.querySelectorAll('.tab-btn');
 
-    let appData = [];
-    let currentFilter = "all";
+    let hasLoggedThisSession = false;
 
-    // LOGIN
     loginBtn.addEventListener('click', async () => {
       const email = document.getElementById('adminEmail').value.trim();
       const password = document.getElementById('adminPassword').value.trim();
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        let ipAddress = "Unknown";
-        try {
-          const response = await fetch("https://api.ipify.org?format=json");
-          const data = await response.json();
-          ipAddress = data.ip;
-        } catch (e) {}
-        await addDoc(collection(db, "admin_logs"), { email: user.email, ip: ipAddress, timestamp: new Date(), userAgent: navigator.userAgent });
+        await signInWithEmailAndPassword(auth, email, password);
         errorMsg.textContent = '';
-      } catch (error) {
+      } catch {
         errorMsg.textContent = 'Invalid credentials ❌';
       }
-    });
-
-    logoutBtn.addEventListener('click', async () => {
-      await signOut(auth);
-      dashboard.style.display = 'none';
-      loginBox.style.display = 'block';
     });
 
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         loginBox.style.display = 'none';
         dashboard.style.display = 'block';
+
         if (user.email === SUPER_ADMIN) {
           logsBtn.style.display = 'inline-block';
           appLogsBtn.style.display = 'inline-block';
         }
+
+        if (!hasLoggedThisSession) {
+          let ip = "Unknown";
+          try {
+            const res = await fetch("https://api.ipify.org?format=json");
+            ip = (await res.json()).ip;
+          } catch {}
+          await addDoc(collection(db, "admin_logs"), {
+            email: user.email,
+            ip,
+            timestamp: new Date(),
+            userAgent: navigator.userAgent
+          });
+          hasLoggedThisSession = true;
+        }
+
         await loadApplications();
         await loadVisits();
       } else {
         dashboard.style.display = 'none';
         loginBox.style.display = 'block';
+        hasLoggedThisSession = false;
       }
-    });
-
-    async function loadApplications() {
-      const snapshot = await getDocs(collection(db, "applications"));
-      appData = [];
-      snapshot.forEach(docSnap => {
-        const d = docSnap.data();
-        d.docId = docSnap.id;
-        if (!d.status) d.status = "pending";
-        if (!Array.isArray(d.skills)) d.skills = d.skills ? [d.skills] : [];
-        appData.push(d);
-      });
-      renderTable(appData);
-      countEl.textContent = appData.length;
-    }
-
-    async function loadVisits() {
-      const visitsSnapshot = await getDocs(collection(db, "visits"));
-      visitsEl.textContent = visitsSnapshot.size;
-    }
-
-    function renderTable(data) {
-      // تطبيق الفلتر والحقل البحثي
-      const searchValue = searchInput.value.toLowerCase().trim();
-      const filteredByStatus = data.filter(d => currentFilter === "all" || d.status === currentFilter);
-      const finalData = filteredByStatus.filter(d =>
-        d.fullName.toLowerCase().includes(searchValue) ||
-        d.email.toLowerCase().includes(searchValue) ||
-        (d.major && d.major.toLowerCase().includes(searchValue)) ||
-        (d.skills && d.skills.join(", ").toLowerCase().includes(searchValue))
-      );
-
-      table.innerHTML = `
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Major</th>
-          <th>Skills</th>
-          <th>Motivation</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      `;
-
-      finalData.forEach(d => {
-        const statusColor = {
-          pending: '#9B59B6',
-          accepted: '#28a745',
-          rejected: '#dc3545',
-          contacted: '#ffc107'
-        }[d.status] || '#9B59B6';
-
-        const row = table.insertRow();
-        row.innerHTML = `
-          <td>${d.fullName}</td>
-          <td>${d.email}</td>
-          <td>${d.major || '-'}</td>
-          <td>${(d.skills || []).join(", ")}</td>
-          <td>${d.motivation || '-'}</td>
-          <td style="color: ${statusColor}; font-weight: bold; text-transform: capitalize;">
-            ${d.status || "Pending"}
-          </td>
-          <td>
-            <button class="accept-btn">✅</button>
-            <button class="reject-btn">❌</button>
-            <button class="contact-btn">📞</button>
-            <button class="delete-btn">🗑️</button>
-          </td>
-        `;
-        const docRef = d.docId;
-
-        // Actions
-        const perform = async (action, update = {}, reason = "") => {
-          // إذا العملية حذف، نُجري deleteDoc أولاً من Firestore
-          if (action === "deleted") {
-            try {
-              await deleteDoc(doc(db, "applications", docRef));
-            } catch (e) {
-              console.error("Failed to delete doc:", e);
-              alert("فشل حذف التطبيق في قاعدة البيانات. راجع الصلاحيات.");
-              return;
-            }
-          } else {
-            // تحديث الحقول فقط للحالات الأخرى
-            if (Object.keys(update).length) {
-              await updateDoc(doc(db, "applications", docRef), update);
-            }
-          }
-
-          // سجل العملية
-          await addDoc(collection(db, "app_logs"), {
-            action,
-            performedBy: auth.currentUser ? auth.currentUser.email : "unknown",
-            targetEmail: d.email,
-            reason: reason || "",
-            timestamp: new Date()
-          });
-
-          // تحديث النسخة المحلية
-          if (update.status) d.status = update.status;
-          if (action === "deleted") appData = appData.filter(a => a.docId !== docRef);
-          renderTable(appData);
-        };
-
-        row.querySelector('.accept-btn').addEventListener('click', () => perform("accepted", { status: "accepted" }));
-        row.querySelector('.reject-btn').addEventListener('click', () => perform("rejected", { status: "rejected" }));
-        row.querySelector('.contact-btn').addEventListener('click', () => perform("contacted", { status: "contacted" }));
-        row.querySelector('.delete-btn').addEventListener('click', async () => {
-          const reason = prompt("أدخل سبب الحذف:");
-          if (reason && reason.trim().length) {
-            await perform("deleted", {}, reason.trim());
-          } else {
-            alert("رجاءً أدخل سببًا للحذف.");
-          }
-        });
-      });
-    }
-
-    searchInput.addEventListener('input', () => renderTable(appData));
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.status;
-        renderTable(appData);
-      });
-    });
-
-    // Logs
-    logsBtn.addEventListener('click', async () => {
-      const q = query(collection(db, "admin_logs"), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-      logsTable.innerHTML = '<tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>';
-      snapshot.forEach(d => {
-        const l = d.data();
-        const date = l.timestamp && l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : (l.timestamp ? new Date(l.timestamp).toLocaleString() : '-');
-        logsTable.insertRow().innerHTML = `<td>${l.email}</td><td>${l.ip || "N/A"}</td><td>${date}</td><td>${l.userAgent || '-'}</td>`;
-      });
-      adminLogs.style.display = 'block';
-      appLogs.style.display = 'none';
-    });
-
-    appLogsBtn.addEventListener('click', async () => {
-      const q = query(collection(db, "app_logs"), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-      appLogsTable.innerHTML = '<tr><th>Action</th><th>Target Email</th><th>Performed By</th><th>Reason</th><th>Timestamp</th></tr>';
-      snapshot.forEach(d => {
-        const l = d.data();
-        const date = l.timestamp && l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : (l.timestamp ? new Date(l.timestamp).toLocaleString() : '-');
-        appLogsTable.insertRow().innerHTML = `<td>${l.action}</td><td>${l.targetEmail}</td><td>${l.performedBy || '-'}</td><td>${l.reason || "-"}</td><td>${date}</td>`;
-      });
-      appLogs.style.display = 'block';
-      adminLogs.style.display = 'none';
-    });
-
-    // CSV
-    downloadBtn.addEventListener('click', () => {
-      let csv = "Full Name,Email,Major,Skills,Motivation,Status\n";
-      appData.forEach(d => {
-        const skills = (d.skills || []).join("; ");
-        const motivation = (d.motivation || "").replace(/\n/g,' ');
-        csv += `"${d.fullName}","${d.email}","${d.major || ''}","${skills}","${motivation}","${d.status || 'pending'}"\n`;
-      });
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "applications.csv";
-      a.click();
-      URL.revokeObjectURL(url);
     });
   </script>
 </body>
