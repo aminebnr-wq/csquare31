@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSQUARE³ Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b001a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login-box, .dashboard {
+      max-width: 420px;
+      background: rgba(75, 0, 130, 0.2);
+      border: 1px solid #9B59B6;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(155, 89, 182, 0.5);
+      text-align: center;
+      margin: 8% auto;
+      transition: 0.3s;
+    }
+
+    h2 {
+      color: #FF7A00;
+    }
+
+    input {
+      width: 90%;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      border: 2px solid #9B59B6;
+      background: #150028;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button {
+      background: linear-gradient(135deg, #4B0082, #9B59B6);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: #FF7A00;
+      box-shadow: 0 0 20px #FF7A00;
+    }
+
+    .dashboard {
+      max-width: 1000px;
+      margin-top: 5rem;
+      padding: 2rem 3rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      color: #fff;
+    }
+
+    th, td {
+      border: 1px solid #9B59B6;
+      padding: 0.7rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(155, 89, 182, 0.3);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 122, 0, 0.15);
+      border: 1px solid #FF7A00;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+
+    .logout-btn {
+      background: crimson;
+    }
+
+    #errorMsg {
+      color: red;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login-box" id="loginBox">
+    <h2>Admin Login</h2>
+    <input type="email" id="adminEmail" placeholder="Email">
+    <input type="password" id="adminPassword" placeholder="Password">
+    <button id="loginBtn">Login</button>
+    <p id="errorMsg"></p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard" style="display:none;">
+    <h2>CSQUARE³ Admin Dashboard</h2>
+    <div class="stats">
+      <div>🧩 Applications: <strong id="count">0</strong></div>
+      <div>👀 Visitors: <strong id="visitsCount">0</strong></div>
+    </div>
+    <button id="downloadBtn">⬇️ Download CSV</button>
+    <table id="appTable">
+      <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>
+    </table>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
+      authDomain: "csquare3-club.firebaseapp.com",
+      projectId: "csquare3-club",
+      storageBucket: "csquare3-club.firebasestorage.app",
+      messagingSenderId: "910428386089",
+      appId: "1:910428386089:web:4e5b10d7d23b818547fd38"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    const loginBox = document.getElementById('loginBox');
+    const dashboard = document.getElementById('dashboard');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const countEl = document.getElementById('count');
+    const visitsEl = document.getElementById('visitsCount');
+    const table = document.getElementById("appTable");
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('adminEmail').value;
+      const password = document.getElementById('adminPassword').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        errorMsg.textContent = '';
+      } catch (error) {
+        errorMsg.textContent = 'Invalid credentials ❌';
+      }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      dashboard.style.display = 'none';
+      loginBox.style.display = 'block';
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        loginBox.style.display = 'none';
+        dashboard.style.display = 'block';
+        await loadApplications();
+        await loadVisits();
+      } else {
+        dashboard.style.display = 'none';
+        loginBox.style.display = 'block';
+      }
+    });
+
+    async function loadApplications() {
+      const snapshot = await getDocs(collection(db, "applications"));
+      let count = 0;
+      table.innerHTML = '<tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>';
+      snapshot.forEach(doc => {
+        count++;
+        const data = doc.data();
+        const row = table.insertRow();
+        row.innerHTML = `
+          <td>${data.fullName}</td>
+          <td>${data.email}</td>
+          <td>${data.major}</td>
+          <td>${data.skills.join(", ")}</td>
+          <td>${data.motivation}</td>
+        `;
+      });
+      countEl.textContent = count;
+    }
+
+    async function loadVisits() {
+      const visitsSnapshot = await getDocs(collection(db, "visits"));
+      visitsEl.textContent = visitsSnapshot.size;
+    }
+
+    downloadBtn.addEventListener('click', async () => {
+      const snapshot = await getDocs(collection(db, "applications"));
+      let csv = "Full Name,Email,Major,Skills,Motivation\n";
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        csv += `"${d.fullName}","${d.email}","${d.major}","${d.skills.join("; ")}","${d.motivation.replace(/\n/g, ' ')}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "applications.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
