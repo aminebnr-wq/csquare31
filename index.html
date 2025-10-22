@@ -1058,6 +1058,15 @@
                 closeSuccess();
             }
         });
+        // Close mobile menu when a link is clicked
+        const navLinkItems = document.querySelectorAll('#navLinks a');
+        
+        navLinkItems.forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+          });
+        });
+
     </script>
 
   
