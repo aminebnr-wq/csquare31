@@ -1089,9 +1089,8 @@
       const successOverlay = document.getElementById("successOverlay");
       const skillOptions = document.querySelectorAll(".skill-option");
     
-      // عند إرسال الفورم
       joinForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // منع التحديث
     
         const formData = new FormData(joinForm);
         const data = {
@@ -1100,7 +1099,7 @@
           major: formData.get("major"),
           skills: formData.getAll("skills"),
           motivation: formData.get("motivation"),
-          timestamp: new Date()
+          timestamp: new Date().toISOString()
         };
     
         if (data.skills.length === 0) {
@@ -1113,23 +1112,23 @@
         submitBtn.textContent = "جارٍ الإرسال...";
     
         try {
-          // 🧩 1. حفظ البيانات في Firestore
+          // 🧩 حفظ في Firestore
           await addDoc(collection(db, "applications"), data);
     
-          // 📨 2. إرسال بريد إلى فريق النادي
+          // 📨 إرسال بريد
           await emailjs.send("service_sautrgd", "template_qq1p9ej", {
             fullName: data.fullName,
             email: data.email,
             major: data.major,
             skills: data.skills.join(", "),
             motivation: data.motivation,
+            timestamp: data.timestamp
           });
     
-          // ✅ عرض رسالة النجاح
+          // ✅ عرض النجاح
           successOverlay.classList.add("show");
           joinForm.reset();
           skillOptions.forEach(opt => opt.classList.remove("checked"));
-    
         } catch (error) {
           console.error("Error:", error);
           alert("حدث خطأ أثناء الإرسال 😕 تحقق من إعدادات Firestore أو EmailJS.");
