@@ -904,7 +904,7 @@
             <p class="section-subtitle">Become part of Annaba's tech revolution</p>
             
             <div class="form-container">
-                <form id="joinForm" onsubmit="return false;">
+                <form id="joinForm">
                     <div class="form-group">
                         <label for="fullName">Full Name *</label>
                         <input type="text" id="fullName" name="fullName" required>
@@ -1061,86 +1061,67 @@
     </script>
 
   
-<!-- مكتبات Firebase و EmailJS -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module">
 
-<script>
-  // إعداد Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
-    authDomain: "csquare3-club.firebaseapp.com",
-    projectId: "csquare3-club",
-    storageBucket: "csquare3-club.firebasestorage.app",
-    messagingSenderId: "910428386089",
-    appId: "1:910428386089:web:4e5b10d7d23b818547fd38",
-    measurementId: "G-6RTLYLFV11"
-  };
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-  // تهيئة Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
 
-  // تهيئة EmailJS
-  emailjs.init("a6JIbe3Gqex1d4xE7");
-
-  const joinForm = document.getElementById("joinForm");
-  const successOverlay = document.getElementById("successOverlay");
-  const skillOptions = document.querySelectorAll(".skill-option");
-
-  joinForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(joinForm);
-    const data = {
-      fullName: formData.get("fullName"),
-      email: formData.get("email"),
-      major: formData.get("major"),
-      skills: formData.getAll("skills"),
-      motivation: formData.get("motivation"),
-      timestamp: new Date().toISOString()
+    const firebaseConfig = {
+        apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
+        authDomain: "csquare3-club.firebaseapp.com",
+        projectId: "csquare3-club",
+        storageBucket: "csquare3-club.firebasestorage.app",
+        messagingSenderId: "910428386089",
+        appId: "1:910428386089:web:4e5b10d7d23b818547fd38",
+        measurementId: "G-6RTLYLFV11"
     };
 
-    if (data.skills.length === 0) {
-      alert("يرجى اختيار مهارة واحدة على الأقل!");
-      return;
-    }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    const submitBtn = joinForm.querySelector(".submit-btn");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "جارٍ الإرسال...";
+    const joinForm = document.getElementById('joinForm');
+    const successOverlay = document.getElementById('successOverlay');
 
-    try {
-      // 🧩 حفظ البيانات في Firestore
-      await db.collection("applications").add(data);
+    joinForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      // 📨 إرسال البريد الإلكتروني
-      await emailjs.send("service_sautrgd", "template_qq1p9ej", {
-        fullName: data.fullName,
-        email: data.email,
-        major: data.major,
-        skills: data.skills.join(", "),
-        motivation: data.motivation,
-        timestamp: data.timestamp
-      });
+        const formData = new FormData(joinForm);
+        const data = {
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        major: formData.get('major'),
+        skills: formData.getAll('skills'),
+        motivation: formData.get('motivation'),
+        timestamp: new Date()
+        };
 
-      // ✅ عرض نجاح
-      successOverlay.classList.add("show");
-      joinForm.reset();
-      skillOptions.forEach(opt => opt.classList.remove("checked"));
+        if (data.skills.length === 0) {
+        alert('يرجى اختيار مهارة واحدة على الأقل!');
+        return;
+        }
 
-    } catch (error) {
-      console.error("Error:", error);
-      alert("حدث خطأ أثناء الإرسال 😕 تحقق من إعدادات Firestore أو EmailJS.");
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit Application";
-    }
-  });
-</script>
+        const submitBtn = joinForm.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'جارٍ الإرسال...';
 
+        try {
+        await addDoc(collection(db, "applications"), data);
 
+        successOverlay.classList.add('show');
+
+        joinForm.reset();
+        skillOptions.forEach(opt => opt.classList.remove('checked'));
+
+        } catch (error) {
+        console.error("Firebase Error:", error);
+        alert("حدث خطأ أثناء إرسال الطلب 😕 تحقق من إعدادات Firestore.");
+        } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+        }
+    });
+    </script>
 
 </body>
 </html>
