@@ -5,24 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CSQUARE³ Admin Dashboard</title>
   <style>
-
-    /* 📱 Responsive Table for mobile */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px; /* يمنع الجدول من الانضغاط التام */
-    }
-    
-    th, td {
-      white-space: nowrap; /* يمنع الكلمات من الكسر */
-    }
-
     body {
       font-family: 'Poppins', sans-serif;
       background: #0b001a;
@@ -43,9 +25,7 @@
       transition: 0.3s;
     }
 
-    h2 {
-      color: #FF7A00;
-    }
+    h2 { color: #FF7A00; }
 
     input {
       width: 90%;
@@ -70,16 +50,9 @@
       margin-top: 0.5rem;
     }
 
-    button:hover {
-      background: #FF7A00;
-      box-shadow: 0 0 20px #FF7A00;
-    }
+    button:hover { background: #FF7A00; box-shadow: 0 0 20px #FF7A00; }
 
-    .dashboard {
-      max-width: 1000px;
-      margin-top: 4rem;
-      padding: 2rem 3rem;
-    }
+    .dashboard { max-width: 1100px; margin-top: 4rem; padding: 2rem 3rem; }
 
     .stats {
       display: flex;
@@ -88,7 +61,7 @@
       border: 1px solid #FF7A00;
       border-radius: 15px;
       padding: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       font-size: 1.2rem;
     }
 
@@ -102,10 +75,32 @@
       margin-bottom: 1rem;
     }
 
+    .tabs { display: flex; gap: 10px; margin-bottom: 1rem; }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid #9B59B6;
+      background: rgba(75,0,130,0.2);
+      color: #fff;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .tab-btn.active { background: #FF7A00; color: #000; }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      min-width: 600px;
       color: #fff;
     }
 
@@ -114,18 +109,21 @@
       padding: 0.7rem;
       text-align: left;
       font-size: 0.9rem;
+      white-space: nowrap;
     }
 
-    th {
-      background: rgba(155, 89, 182, 0.3);
+    th { background: rgba(155, 89, 182, 0.3); }
+
+    td button {
+      margin: 0 2px;
+      padding: 0.3rem 0.5rem;
+      font-size: 0.8rem;
+      border-radius: 8px;
     }
 
-    .logout-btn {
-      background: crimson;
-      margin-top: 1rem;
-    }
+    .logout-btn { background: crimson; margin-top: 1rem; }
 
-    .admin-logs {
+    .admin-logs, .app-logs {
       background: rgba(75, 0, 130, 0.3);
       padding: 1rem;
       border-radius: 15px;
@@ -133,9 +131,13 @@
       display: none;
     }
 
-    #errorMsg {
-      color: red;
-      margin-top: 1rem;
+    #errorMsg { color: red; margin-top: 1rem; }
+
+    .admin-section-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -157,22 +159,42 @@
       <div>👀 Visitors: <strong id="visitsCount">0</strong></div>
     </div>
 
+    <div class="admin-section-buttons">
+      <button id="downloadBtn">⬇️ Download CSV</button>
+      <button id="logsBtn" style="display:none;">📜 View Admin Logs</button>
+      <button id="appLogsBtn" style="display:none;">📋 View Applications Logs</button>
+    </div>
+
+    <div class="tabs">
+      <div class="tab-btn active" data-status="all">All</div>
+      <div class="tab-btn" data-status="pending">Pending</div>
+      <div class="tab-btn" data-status="accepted">Accepted ✅</div>
+      <div class="tab-btn" data-status="rejected">Rejected ❌</div>
+      <div class="tab-btn" data-status="contacted">Contacted 📞</div>
+    </div>
+
     <input type="text" id="searchInput" placeholder="🔍 Search by name, email, major or skill...">
-    <button id="downloadBtn">⬇️ Download CSV</button>
-    <button id="logsBtn" style="display:none;">📜 View Admin Logs</button>
-    
+
     <div class="table-container">
       <table id="appTable">
-        <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>
+        <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th><th>Status</th><th>Actions</th></tr>
       </table>
     </div>
 
     <div class="admin-logs" id="adminLogs">
       <h3>Admin Login Activity</h3>
-      
       <div class="table-container">
         <table id="logsTable">
           <tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="app-logs" id="appLogs">
+      <h3>Applications Logs</h3>
+      <div class="table-container">
+        <table id="appLogsTable">
+          <tr><th>Action</th><th>Target Email</th><th>Performed By</th><th>Reason</th><th>Timestamp</th></tr>
         </table>
       </div>
     </div>
@@ -182,7 +204,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, addDoc, orderBy, query, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -197,7 +219,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
-
     const SUPER_ADMIN = "admin@csquare3.club";
 
     const loginBox = document.getElementById('loginBox');
@@ -211,35 +232,30 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const searchInput = document.getElementById('searchInput');
     const logsBtn = document.getElementById('logsBtn');
+    const appLogsBtn = document.getElementById('appLogsBtn');
     const adminLogs = document.getElementById('adminLogs');
     const logsTable = document.getElementById('logsTable');
+    const appLogs = document.getElementById('appLogs');
+    const appLogsTable = document.getElementById('appLogsTable');
+    const tabButtons = document.querySelectorAll('.tab-btn');
 
+    let appData = [];
+    let currentFilter = "all";
+
+    // LOGIN
     loginBtn.addEventListener('click', async () => {
       const email = document.getElementById('adminEmail').value.trim();
       const password = document.getElementById('adminPassword').value.trim();
-
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-
-        // الحصول على IP العام
         let ipAddress = "Unknown";
         try {
           const response = await fetch("https://api.ipify.org?format=json");
           const data = await response.json();
           ipAddress = data.ip;
-        } catch (e) {
-          console.warn("IP fetch failed", e);
-        }
-
-        // سجل الدخول لأي حساب Admin
-        await addDoc(collection(db, "admin_logs"), {
-          email: user.email,
-          ip: ipAddress,
-          timestamp: new Date(),
-          userAgent: navigator.userAgent
-        });
-
+        } catch (e) {}
+        await addDoc(collection(db, "admin_logs"), { email: user.email, ip: ipAddress, timestamp: new Date(), userAgent: navigator.userAgent });
         errorMsg.textContent = '';
       } catch (error) {
         errorMsg.textContent = 'Invalid credentials ❌';
@@ -256,11 +272,10 @@
       if (user) {
         loginBox.style.display = 'none';
         dashboard.style.display = 'block';
-
         if (user.email === SUPER_ADMIN) {
           logsBtn.style.display = 'inline-block';
+          appLogsBtn.style.display = 'inline-block';
         }
-
         await loadApplications();
         await loadVisits();
       } else {
@@ -269,24 +284,17 @@
       }
     });
 
-    let appData = [];
-
     async function loadApplications() {
       const snapshot = await getDocs(collection(db, "applications"));
       appData = [];
-      table.innerHTML = '<tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>';
-      snapshot.forEach(doc => {
-        const d = doc.data();
+      snapshot.forEach(docSnap => {
+        const d = docSnap.data();
+        d.docId = docSnap.id;
+        if (!d.status) d.status = "pending";
+        if (!Array.isArray(d.skills)) d.skills = d.skills ? [d.skills] : [];
         appData.push(d);
-        const row = table.insertRow();
-        row.innerHTML = `
-          <td>${d.fullName}</td>
-          <td>${d.email}</td>
-          <td>${d.major}</td>
-          <td>${d.skills.join(", ")}</td>
-          <td>${d.motivation}</td>
-        `;
       });
+      renderTable(appData);
       countEl.textContent = appData.length;
     }
 
@@ -295,35 +303,147 @@
       visitsEl.textContent = visitsSnapshot.size;
     }
 
-    searchInput.addEventListener('input', () => {
-      const value = searchInput.value.toLowerCase();
-      const filtered = appData.filter(d =>
-        d.fullName.toLowerCase().includes(value) ||
-        d.email.toLowerCase().includes(value) ||
-        d.major.toLowerCase().includes(value) ||
-        d.skills.join(", ").toLowerCase().includes(value)
-      );
-      renderTable(filtered);
-    });
-
     function renderTable(data) {
-      table.innerHTML = '<tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>';
-      data.forEach(d => {
+      // تطبيق الفلتر والحقل البحثي
+      const searchValue = searchInput.value.toLowerCase().trim();
+      const filteredByStatus = data.filter(d => currentFilter === "all" || d.status === currentFilter);
+      const finalData = filteredByStatus.filter(d =>
+        d.fullName.toLowerCase().includes(searchValue) ||
+        d.email.toLowerCase().includes(searchValue) ||
+        (d.major && d.major.toLowerCase().includes(searchValue)) ||
+        (d.skills && d.skills.join(", ").toLowerCase().includes(searchValue))
+      );
+
+      table.innerHTML = `
+        <tr>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Major</th>
+          <th>Skills</th>
+          <th>Motivation</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      `;
+
+      finalData.forEach(d => {
+        const statusColor = {
+          pending: '#9B59B6',
+          accepted: '#28a745',
+          rejected: '#dc3545',
+          contacted: '#ffc107'
+        }[d.status] || '#9B59B6';
+
         const row = table.insertRow();
         row.innerHTML = `
           <td>${d.fullName}</td>
           <td>${d.email}</td>
-          <td>${d.major}</td>
-          <td>${d.skills.join(", ")}</td>
-          <td>${d.motivation}</td>
+          <td>${d.major || '-'}</td>
+          <td>${(d.skills || []).join(", ")}</td>
+          <td>${d.motivation || '-'}</td>
+          <td style="color: ${statusColor}; font-weight: bold; text-transform: capitalize;">
+            ${d.status || "Pending"}
+          </td>
+          <td>
+            <button class="accept-btn">✅</button>
+            <button class="reject-btn">❌</button>
+            <button class="contact-btn">📞</button>
+            <button class="delete-btn">🗑️</button>
+          </td>
         `;
+        const docRef = d.docId;
+
+        // Actions
+        const perform = async (action, update = {}, reason = "") => {
+          // إذا العملية حذف، نُجري deleteDoc أولاً من Firestore
+          if (action === "deleted") {
+            try {
+              await deleteDoc(doc(db, "applications", docRef));
+            } catch (e) {
+              console.error("Failed to delete doc:", e);
+              alert("فشل حذف التطبيق في قاعدة البيانات. راجع الصلاحيات.");
+              return;
+            }
+          } else {
+            // تحديث الحقول فقط للحالات الأخرى
+            if (Object.keys(update).length) {
+              await updateDoc(doc(db, "applications", docRef), update);
+            }
+          }
+
+          // سجل العملية
+          await addDoc(collection(db, "app_logs"), {
+            action,
+            performedBy: auth.currentUser ? auth.currentUser.email : "unknown",
+            targetEmail: d.email,
+            reason: reason || "",
+            timestamp: new Date()
+          });
+
+          // تحديث النسخة المحلية
+          if (update.status) d.status = update.status;
+          if (action === "deleted") appData = appData.filter(a => a.docId !== docRef);
+          renderTable(appData);
+        };
+
+        row.querySelector('.accept-btn').addEventListener('click', () => perform("accepted", { status: "accepted" }));
+        row.querySelector('.reject-btn').addEventListener('click', () => perform("rejected", { status: "rejected" }));
+        row.querySelector('.contact-btn').addEventListener('click', () => perform("contacted", { status: "contacted" }));
+        row.querySelector('.delete-btn').addEventListener('click', async () => {
+          const reason = prompt("أدخل سبب الحذف:");
+          if (reason && reason.trim().length) {
+            await perform("deleted", {}, reason.trim());
+          } else {
+            alert("رجاءً أدخل سببًا للحذف.");
+          }
+        });
       });
     }
 
+    searchInput.addEventListener('input', () => renderTable(appData));
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.status;
+        renderTable(appData);
+      });
+    });
+
+    // Logs
+    logsBtn.addEventListener('click', async () => {
+      const q = query(collection(db, "admin_logs"), orderBy("timestamp", "desc"));
+      const snapshot = await getDocs(q);
+      logsTable.innerHTML = '<tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>';
+      snapshot.forEach(d => {
+        const l = d.data();
+        const date = l.timestamp && l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : (l.timestamp ? new Date(l.timestamp).toLocaleString() : '-');
+        logsTable.insertRow().innerHTML = `<td>${l.email}</td><td>${l.ip || "N/A"}</td><td>${date}</td><td>${l.userAgent || '-'}</td>`;
+      });
+      adminLogs.style.display = 'block';
+      appLogs.style.display = 'none';
+    });
+
+    appLogsBtn.addEventListener('click', async () => {
+      const q = query(collection(db, "app_logs"), orderBy("timestamp", "desc"));
+      const snapshot = await getDocs(q);
+      appLogsTable.innerHTML = '<tr><th>Action</th><th>Target Email</th><th>Performed By</th><th>Reason</th><th>Timestamp</th></tr>';
+      snapshot.forEach(d => {
+        const l = d.data();
+        const date = l.timestamp && l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : (l.timestamp ? new Date(l.timestamp).toLocaleString() : '-');
+        appLogsTable.insertRow().innerHTML = `<td>${l.action}</td><td>${l.targetEmail}</td><td>${l.performedBy || '-'}</td><td>${l.reason || "-"}</td><td>${date}</td>`;
+      });
+      appLogs.style.display = 'block';
+      adminLogs.style.display = 'none';
+    });
+
+    // CSV
     downloadBtn.addEventListener('click', () => {
-      let csv = "Full Name,Email,Major,Skills,Motivation\n";
+      let csv = "Full Name,Email,Major,Skills,Motivation,Status\n";
       appData.forEach(d => {
-        csv += `"${d.fullName}","${d.email}","${d.major}","${d.skills.join("; ")}","${d.motivation.replace(/\n/g, ' ')}"\n`;
+        const skills = (d.skills || []).join("; ");
+        const motivation = (d.motivation || "").replace(/\n/g,' ');
+        csv += `"${d.fullName}","${d.email}","${d.major || ''}","${skills}","${motivation}","${d.status || 'pending'}"\n`;
       });
       const blob = new Blob([csv], { type: "text/csv" });
       const url = URL.createObjectURL(blob);
@@ -333,26 +453,6 @@
       a.click();
       URL.revokeObjectURL(url);
     });
-
-    // تحميل السجل (للسوبر أدمن فقط)
-    logsBtn.addEventListener('click', async () => {
-      const q = query(collection(db, "admin_logs"), orderBy("timestamp", "desc"));
-      const logsSnapshot = await getDocs(q);
-      logsTable.innerHTML = '<tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>';
-      logsSnapshot.forEach(doc => {
-        const l = doc.data();
-        const date = new Date(l.timestamp.seconds * 1000).toLocaleString();
-        const row = logsTable.insertRow();
-        row.innerHTML = `
-          <td>${l.email}</td>
-          <td>${l.ip || "N/A"}</td>
-          <td>${date}</td>
-          <td>${l.userAgent}</td>
-        `;
-      });
-      adminLogs.style.display = 'block';
-    });
   </script>
 </body>
 </html>
-
