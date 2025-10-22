@@ -59,14 +59,35 @@
 
     .dashboard {
       max-width: 1000px;
-      margin-top: 5rem;
+      margin-top: 4rem;
       padding: 2rem 3rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 122, 0, 0.15);
+      border: 1px solid #FF7A00;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 2px solid #9B59B6;
+      background: #150028;
+      color: #fff;
+      margin-bottom: 1rem;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 2rem;
+      margin-top: 1rem;
       color: #fff;
     }
 
@@ -81,19 +102,9 @@
       background: rgba(155, 89, 182, 0.3);
     }
 
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      background: rgba(255, 122, 0, 0.15);
-      border: 1px solid #FF7A00;
-      border-radius: 15px;
-      padding: 1rem;
-      margin-bottom: 2rem;
-      font-size: 1.2rem;
-    }
-
     .logout-btn {
       background: crimson;
+      margin-top: 1rem;
     }
 
     #errorMsg {
@@ -119,16 +130,20 @@
       <div>🧩 Applications: <strong id="count">0</strong></div>
       <div>👀 Visitors: <strong id="visitsCount">0</strong></div>
     </div>
+
+    <input type="text" id="searchInput" placeholder="🔍 Search by name, email, major or skill...">
     <button id="downloadBtn">⬇️ Download CSV</button>
+
     <table id="appTable">
       <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>
     </table>
+
     <button class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -144,6 +159,8 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
+    const ADMIN_EMAIL = "admin@csquare3.club";
+
     const loginBox = document.getElementById('loginBox');
     const dashboard = document.getElementById('dashboard');
     const loginBtn = document.getElementById('loginBtn');
@@ -153,13 +170,31 @@
     const visitsEl = document.getElementById('visitsCount');
     const table = document.getElementById("appTable");
     const downloadBtn = document.getElementById('downloadBtn');
+    const searchInput = document.getElementById('searchInput');
 
     loginBtn.addEventListener('click', async () => {
-      const email = document.getElementById('adminEmail').value;
-      const password = document.getElementById('adminPassword').value;
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value.trim();
+
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Only allow admin
+        if (user.email !== ADMIN_EMAIL) {
+          await signOut(auth);
+          errorMsg.textContent = 'Access denied ❌ You are not authorized.';
+          return;
+        }
+
+        await addDoc(collection(db, "admin_logs"), {
+          email: user.email,
+          timestamp: new Date(),
+          userAgent: navigator.userAgent
+        });
+
         errorMsg.textContent = '';
+
       } catch (error) {
         errorMsg.textContent = 'Invalid credentials ❌';
       }
@@ -172,7 +207,7 @@
     });
 
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (user && user.email === ADMIN_EMAIL) {
         loginBox.style.display = 'none';
         dashboard.style.display = 'block';
         await loadApplications();
@@ -183,23 +218,25 @@
       }
     });
 
+    let appData = [];
+
     async function loadApplications() {
       const snapshot = await getDocs(collection(db, "applications"));
-      let count = 0;
+      appData = [];
       table.innerHTML = '<tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>';
       snapshot.forEach(doc => {
-        count++;
-        const data = doc.data();
+        const d = doc.data();
+        appData.push(d);
         const row = table.insertRow();
         row.innerHTML = `
-          <td>${data.fullName}</td>
-          <td>${data.email}</td>
-          <td>${data.major}</td>
-          <td>${data.skills.join(", ")}</td>
-          <td>${data.motivation}</td>
+          <td>${d.fullName}</td>
+          <td>${d.email}</td>
+          <td>${d.major}</td>
+          <td>${d.skills.join(", ")}</td>
+          <td>${d.motivation}</td>
         `;
       });
-      countEl.textContent = count;
+      countEl.textContent = appData.length;
     }
 
     async function loadVisits() {
@@ -207,11 +244,34 @@
       visitsEl.textContent = visitsSnapshot.size;
     }
 
-    downloadBtn.addEventListener('click', async () => {
-      const snapshot = await getDocs(collection(db, "applications"));
+    searchInput.addEventListener('input', () => {
+      const value = searchInput.value.toLowerCase();
+      const filtered = appData.filter(d =>
+        d.fullName.toLowerCase().includes(value) ||
+        d.email.toLowerCase().includes(value) ||
+        d.major.toLowerCase().includes(value) ||
+        d.skills.join(", ").toLowerCase().includes(value)
+      );
+      renderTable(filtered);
+    });
+
+    function renderTable(data) {
+      table.innerHTML = '<tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th></tr>';
+      data.forEach(d => {
+        const row = table.insertRow();
+        row.innerHTML = `
+          <td>${d.fullName}</td>
+          <td>${d.email}</td>
+          <td>${d.major}</td>
+          <td>${d.skills.join(", ")}</td>
+          <td>${d.motivation}</td>
+        `;
+      });
+    }
+
+    downloadBtn.addEventListener('click', () => {
       let csv = "Full Name,Email,Major,Skills,Motivation\n";
-      snapshot.forEach(doc => {
-        const d = doc.data();
+      appData.forEach(d => {
         csv += `"${d.fullName}","${d.email}","${d.major}","${d.skills.join("; ")}","${d.motivation.replace(/\n/g, ' ')}"\n`;
       });
       const blob = new Blob([csv], { type: "text/csv" });
@@ -219,9 +279,8 @@
       const a = document.createElement("a");
       a.href = url;
       a.download = "applications.csv";
-      document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     });
   </script>
 </body>
