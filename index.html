@@ -1065,7 +1065,6 @@
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-    import emailjs from "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
@@ -1083,8 +1082,6 @@
     const joinForm = document.getElementById('joinForm');
     const successOverlay = document.getElementById('successOverlay');
 
-      // تهيئة EmailJS
-    emailjs.init("a6JIbe3Gqex1d4xE7");
 
     joinForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -1110,14 +1107,7 @@
 
         try {
         await addDoc(collection(db, "applications"), data);
-          // 📨 2. إرسال الإيميل عبر EmailJS
-        await emailjs.send("service_sautrgd", "template_qq1p9ej", {
-            fullName: data.fullName,
-            email: data.email,
-            major: data.major,
-            skills: data.skills.join(", "),
-            motivation: data.motivation
-        });
+
         successOverlay.classList.add('show');
 
         joinForm.reset();
