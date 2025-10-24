@@ -200,8 +200,8 @@
       </div>
 
       <div class="controls">
-        <button class="btn" id="refreshBtn" title="Refresh data">🔄 Refresh</button>
-        <button class="btn" id="exportBtn" title="Download CSV">⬇️ Export CSV</button>
+        <button class="btn" id="refreshBtn" style="display:none" title="Refresh data">🔄 Refresh</button>
+        <button class="btn" id="exportBtn" style="display:none" title="Download CSV">⬇️ Export CSV</button>        
         <button class="btn" id="logoutBtnTop" style="display:none">Logout</button>
       </div>
     </div>
@@ -332,7 +332,7 @@
     const auth = getAuth(app);
 
     // ---------- CONSTANTS ----------
-    const SERVICE_COLLECTION = "serviceRequests"; // <--- إذا تريد تغييره اعدل هنا
+    const SERVICE_COLLECTION = "applications";
     const ADMIN_LOGS_COLLECTION = "admin_logs";
     const APP_LOGS_COLLECTION = "app_logs";
     const VISITS_COLLECTION = "visits";
@@ -437,6 +437,8 @@
         dashboard.style.display = 'block';
         logoutTop.style.display = 'inline-block';
         showLogsBtn.style.display = isSuper ? 'inline-block' : 'none';
+        refreshBtn.style.display = 'inline-block';
+        exportBtn.style.display = 'inline-block';
         // initial load and setup real-time listener
         await loadVisits();
         await initialLoadAndListen();
@@ -445,6 +447,9 @@
         loginBox.style.display = 'block';
         dashboard.style.display = 'none';
         logoutTop.style.display = 'none';
+        refreshBtn.style.display = 'none';
+        exportBtn.style.display = 'none';
+
       }
     });
 
@@ -524,7 +529,7 @@
         const stat = (r.status || 'pending').toLowerCase();
         if(currentFilter !== 'all' && stat !== currentFilter) return false;
         if(!q) return true;
-        const hay = `${r.clientName || ''} ${r.email || ''} ${(r.serviceTags||[]).join(' ')} ${r.projectDescription||''}`.toLowerCase();
+        const hay = `${r.fullName || ''} ${r.email || ''} ${(r.services||[]).join(' ')} ${r.motivation||''}`.toLowerCase();
         return hay.includes(q);
       });
 
@@ -544,18 +549,26 @@
         tr.appendChild(chTd);
 
         // client name
-        const nameTd = document.createElement('td'); nameTd.textContent = r.clientName || '-'; tr.appendChild(nameTd);
+        const nameTd = document.createElement('td'); nameTd.textContent = r.fullName || '-'; tr.appendChild(nameTd);
         const emailTd = document.createElement('td'); emailTd.textContent = r.email || '-'; tr.appendChild(emailTd);
         const phoneTd = document.createElement('td'); phoneTd.textContent = r.phone || '-'; tr.appendChild(phoneTd);
 
         // service tags
         const tagsTd = document.createElement('td');
-        (r.serviceTags||[]).forEach(t => {
-          const span = document.createElement('span'); span.className = 'tag'; span.textContent = t; tagsTd.appendChild(span);
+        (r.services||[]).forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = t;
+          tagsTd.appendChild(span);
         });
+
         tr.appendChild(tagsTd);
 
-        const projTd = document.createElement('td'); projTd.textContent = r.projectDescription ? (r.projectDescription.length>120 ? r.projectDescription.slice(0,117)+'...' : r.projectDescription) : '-'; tr.appendChild(projTd);
+        const projTd = document.createElement('td');
+        projTd.textContent = r.motivation
+          ? (r.motivation.length > 120 ? r.motivation.slice(0,117) + '...' : r.motivation)
+          : '-';
+        tr.appendChild(projTd);
 
         const statusTd = document.createElement('td');
         const st = (r.status || 'pending');
@@ -711,11 +724,11 @@
       ];
       requests.forEach(r => {
         rows.push([
-          r.clientName || '',
+          r.fullName || '',
           r.email || '',
           r.phone || '',
-          (r.serviceTags||[]).join('; '),
-          (r.projectDescription||'').replace(/\n/g,' '),
+          (r.services||[]).join('; '),
+          (r.motivation||'').replace(/\n/g,' '),
           r.status || '',
           r._createdAt ? r._createdAt.toLocaleString() : ''
         ]);
