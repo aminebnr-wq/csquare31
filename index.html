@@ -1152,6 +1152,7 @@ From web development and UI/UX design to filmmaking, video production, and editi
         const serviceTags = document.querySelectorAll('.service-tag');
         const selectedServicesDisplay = document.getElementById('selectedServicesDisplay');
         let selectedServices = [];
+        window.selectedServices = selectedServices;
 
         // Category Click Handler
         categoryTags.forEach(tag => {
@@ -1188,6 +1189,7 @@ From web development and UI/UX design to filmmaking, video production, and editi
                 updateSelectedServicesDisplay();
             });
         });
+        window.selectedServices = selectedServices;
 
         // Update Selected Services Display
         function updateSelectedServicesDisplay() {
@@ -1202,7 +1204,8 @@ From web development and UI/UX design to filmmaking, video production, and editi
                 `).join('');
             }
         }
-
+        window.selectedServices = selectedServices;
+        
         // Remove Service
         function removeService(serviceName) {
             selectedServices = selectedServices.filter(s => s !== serviceName);
@@ -1279,7 +1282,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         fullName: formData.get("fullName"),
         email: formData.get("email"),
         phone: formData.get("phone"),
-        services: window.selectedServices || [],
+        services: selectedServices,
         motivation: formData.get("motivation"),
         timestamp: new Date()
       };
@@ -1397,7 +1400,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         }
       }, 100);
     }
-    window.selectedServices = selectedServices;
   });
 </script>
 
