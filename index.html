@@ -1,25 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSQUARE³ - Code • Create • Compile | Annaba Tech Club</title>
-    <meta name="description" content="CSQUARE³ - Annaba University's premier tech and creativity club. Join us in coding, digital art, graphic design, and filmmaking.">
+    <title>CSQUARE³ Agency - Code • Create • Deliver</title>
+    <meta name="description" content="CSQUARE³ Agency — Digital services: programming, graphic design, video editing and photography. Request a service and our team will handle it.">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <meta property="og:title" content="CSQUARE³ - Code • Create • Compile | Annaba Tech Club">
-    <meta property="og:description" content="CSQUARE³ — نادي التقنية والإبداع بجامعة عنابة. اكتشف البرمجة، التصميم، وصناعة المحتوى الرقمي.">
+    <meta property="og:title" content="CSQUARE³ Agency - Code • Create • Deliver">
+    <meta property="og:description" content="CSQUARE³ Agency — خدمات رقمية: برمجة، تصميم جرافيكي، تحرير فيديو، وتصوير فوتوغرافي.">
     <meta property="og:image" content="images/logo1.png">
     <meta property="og:url" content="https://csquare3.vercel.app/">
     <meta property="og:type" content="website">
-    <!-- SEO Keywords -->
-    <meta name="keywords" content="CSQUARE3, C SQUARE, CSQUARE³, نادي التقنية, جامعة عنابة, Annaba University, Tech Club Annaba, Programming, Coding Club, Full Stack, Design, Filmmaking, Artificial Intelligence, Machine Learning, Web Development, Graphic Design, Algeria Clubs, Student Community, مطورين, برمجة, تطوير مواقع, نادي طلابي, إبداع, تيدج إدين فرحات, بنور أمين, نادي عنابة, CSQUARE Club">
+    <meta name="keywords" content="CSQUARE3, CSQUARE Agency, Digital Agency, Programming, Graphic Design, Video Editing, Photography, Annaba, Algeria">
     <style>
+        /* (نفس CSS الأصلي مع بعض تعديلات بسيطة في النصوص لا تغير الستايل) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --deep-purple: #231123;
             --violet: #c30f45; 
@@ -28,16 +28,12 @@
             --light-orange: #e64f7a; 
             --bg-dark: #0b0610;
         }
-
-
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg-dark);
             color: #fff;
             overflow-x: hidden;
         }
-
-        /* Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -47,14 +43,12 @@
             z-index: -1;
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--dark-purple) 50%, var(--bg-dark) 100%);
         }
-
         .particles {
             position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
         }
-
         .particle {
             position: absolute;
             width: 4px;
@@ -65,15 +59,12 @@
             animation: float 15s infinite;
             box-shadow: 0 0 10px var(--accent-orange);
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) translateX(0); }
             25% { transform: translateY(-100px) translateX(50px); }
             50% { transform: translateY(-200px) translateX(-50px); }
             75% { transform: translateY(-100px) translateX(100px); }
         }
-
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -84,7 +75,6 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(155, 89, 182, 0.3);
         }
-
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -92,7 +82,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.8rem;
@@ -100,19 +89,19 @@
             color: var(--violet);
             text-shadow: 0 0 20px var(--violet);
             cursor: pointer;
+            display:flex;
+            align-items:center;
+            gap:10px;
         }
-
         .logo sup {
             color: var(--accent-orange);
             text-shadow: 0 0 20px var(--accent-orange);
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
-
         .nav-links a {
             color: #fff;
             text-decoration: none;
@@ -121,12 +110,10 @@
             position: relative;
             cursor: pointer;
         }
-
         .nav-links a:hover {
             color: var(--accent-orange);
             text-shadow: 0 0 10px var(--accent-orange);
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -137,18 +124,15 @@
             background: var(--accent-orange);
             transition: width 0.3s;
         }
-
         .nav-links a:hover::after {
             width: 100%;
         }
-
         .mobile-menu {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
         }
-
         .mobile-menu span {
             width: 25px;
             height: 3px;
@@ -156,17 +140,14 @@
             border-radius: 2px;
             transition: all 0.3s;
         }
-
         .page {
             min-height: 100vh;
             padding: 8rem 5%;
-            scroll-margin-top: 100px; /* عشان ما يختفي العنوان تحت الشريط */
+            scroll-margin-top: 100px;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -177,8 +158,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Hero Section */
         #home {
             display: flex;
             flex-direction: column;
@@ -187,7 +166,6 @@
             text-align: center;
             padding: 0 5%;
         }
-
         .hero-logo {
             font-family: 'Montserrat', sans-serif;
             font-size: 6rem;
@@ -197,17 +175,14 @@
             animation: glow 2s ease-in-out infinite alternate;
             margin-bottom: 1rem;
         }
-
         .hero-logo sup {
             color: var(--accent-orange);
             text-shadow: 0 0 40px var(--accent-orange);
         }
-
         @keyframes glow {
             from { text-shadow: 0 0 20px var(--violet), 0 0 40px var(--violet); }
             to { text-shadow: 0 0 40px var(--violet), 0 0 80px var(--violet), 0 0 120px var(--violet); }
         }
-
         .typing-text {
             font-family: 'JetBrains Mono', monospace;
             font-size: 2rem;
@@ -219,16 +194,13 @@
             white-space: nowrap;
             animation: typing 3s steps(30) infinite, blink 0.7s infinite;
         }
-
         @keyframes typing {
             0%, 90%, 100% { width: 0; }
             30%, 60% { width: 100%; }
         }
-
         @keyframes blink {
             50% { border-color: transparent; }
         }
-
         .cta-button {
             padding: 1.2rem 3rem;
             font-size: 1.2rem;
@@ -244,7 +216,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .cta-button::before {
             content: '';
             position: absolute;
@@ -258,23 +229,18 @@
             transition: width 0.6s, height 0.6s;
             z-index: -1;
         }
-
         .cta-button:hover::before {
             width: 400px;
             height: 400px;
         }
-
         .cta-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 40px var(--accent-orange);
         }
-
-        /* Section Styling */
         .page-content {
             max-width: 1400px;
             margin: 0 auto;
         }
-
         .section-title {
             font-family: 'Montserrat', sans-serif;
             font-size: 3.5rem;
@@ -285,7 +251,6 @@
             text-align: center;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -297,34 +262,28 @@
             background: linear-gradient(90deg, var(--violet), var(--accent-orange));
             border-radius: 2px;
         }
-
         .section-subtitle {
             text-align: center;
             font-size: 1.2rem;
             color: #aaa;
             margin-bottom: 4rem;
         }
-
-        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
         }
-
         .about-text {
             font-size: 1.1rem;
             line-height: 1.8;
             color: #ccc;
         }
-
         .about-text h3 {
             color: var(--accent-orange);
             font-size: 1.8rem;
             margin-bottom: 1rem;
         }
-
         .about-image {
             width: 100%;
             height: 400px;
@@ -338,15 +297,12 @@
             font-size: 1.5rem;
             color: var(--violet);
         }
-
-        /* Members Section */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-
         .member-card {
             background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(46, 0, 62, 0.3));
             border: 2px solid var(--violet);
@@ -357,7 +313,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .member-card::before {
             content: '';
             position: absolute;
@@ -368,19 +323,14 @@
             background: linear-gradient(90deg, transparent, rgba(255, 122, 0, 0.2), transparent);
             transition: left 0.5s;
         }
-
         .member-card:hover::before {
             left: 100%;
         }
-
         .member-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-orange);
             box-shadow: 0 10px 40px rgba(255, 122, 0, 0.4);
         }
-
-
-
         .member-image img {
             width: 120px;
             height: 120px;
@@ -389,20 +339,16 @@
             border: 3px solid var(--accent-orange);
             box-shadow: 0 0 20px var(--accent-orange);
         }
-
-
         .member-card h3 {
             font-size: 1.5rem;
             color: #fff;
             margin-bottom: 0.5rem;
         }
-
         .member-role {
             color: var(--accent-orange);
             font-weight: 600;
             margin-bottom: 1rem;
         }
-
         .member-socials {
             display: flex;
             gap: 1rem;
@@ -411,12 +357,10 @@
             transform: translateY(10px);
             transition: all 0.3s;
         }
-
         .member-card:hover .member-socials {
             opacity: 1;
             transform: translateY(0);
         }
-
         .member-socials a {
             color: #fff;
             text-decoration: none;
@@ -427,15 +371,12 @@
             font-size: 0.9rem;
             transition: all 0.3s;
         }
-
         .member-socials a:hover {
             background: var(--accent-orange);
             box-shadow: 0 0 15px var(--accent-orange);
         }
-
-        /* Join Form */
         .form-container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(46, 0, 62, 0.3));
             border: 2px solid var(--violet);
@@ -443,11 +384,9 @@
             padding: 3rem;
             box-shadow: 0 0 40px rgba(155, 89, 182, 0.3);
         }
-
         .form-group {
             margin-bottom: 2rem;
         }
-
         .form-group label {
             display: block;
             color: var(--accent-orange);
@@ -455,9 +394,9 @@
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
-
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 1rem;
             background: rgba(10, 0, 21, 0.8);
@@ -468,27 +407,23 @@
             font-size: 1rem;
             transition: all 0.3s;
         }
-
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--accent-orange);
             box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
         }
-
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
         }
-
-        /* Skills Checkbox Group */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
-
         .skill-option {
             display: flex;
             align-items: center;
@@ -499,12 +434,10 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .skill-option:hover {
             border-color: var(--accent-orange);
             background: rgba(255, 122, 0, 0.1);
         }
-
         .skill-option input[type="checkbox"] {
             width: 20px;
             height: 20px;
@@ -512,19 +445,16 @@
             cursor: pointer;
             accent-color: var(--accent-orange);
         }
-
         .skill-option.checked {
             border-color: var(--accent-orange);
             background: rgba(255, 122, 0, 0.2);
             box-shadow: 0 0 15px rgba(255, 122, 0, 0.3);
         }
-
         .skill-option label {
             cursor: pointer;
             margin: 0 !important;
             font-size: 1rem !important;
         }
-
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
@@ -538,18 +468,14 @@
             transition: all 0.3s;
             box-shadow: 0 0 20px var(--accent-orange);
         }
-
         .submit-btn:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 5px 30px var(--accent-orange);
         }
-
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-
-        /* Success Animation */
         .success-overlay {
             display: none;
             position: fixed;
@@ -562,12 +488,10 @@
             justify-content: center;
             align-items: center;
         }
-
         .success-overlay.show {
             display: flex;
             animation: fadeIn 0.3s;
         }
-
         .success-content {
             text-align: center;
             padding: 3rem;
@@ -577,7 +501,6 @@
             box-shadow: 0 0 60px var(--accent-orange);
             animation: scaleIn 0.5s;
         }
-
         @keyframes scaleIn {
             from {
                 transform: scale(0.5);
@@ -588,7 +511,6 @@
                 opacity: 1;
             }
         }
-
         .success-checkmark {
             width: 100px;
             height: 100px;
@@ -598,12 +520,10 @@
             position: relative;
             animation: checkmarkPulse 0.8s ease-in-out;
         }
-
         @keyframes checkmarkPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-
         .success-checkmark::after {
             content: '✓';
             position: absolute;
@@ -615,7 +535,6 @@
             text-shadow: 0 0 30px #00ff00;
             animation: checkmarkAppear 0.5s 0.3s both;
         }
-
         @keyframes checkmarkAppear {
             from {
                 opacity: 0;
@@ -626,21 +545,18 @@
                 transform: translate(-50%, -50%) scale(1);
             }
         }
-
         .success-content h2 {
             font-size: 2.5rem;
             color: var(--accent-orange);
             margin-bottom: 1rem;
             animation: slideUp 0.5s 0.5s both;
         }
-
         .success-content p {
             font-size: 1.2rem;
             color: #ccc;
             margin-bottom: 2rem;
             animation: slideUp 0.5s 0.7s both;
         }
-
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -651,7 +567,6 @@
                 transform: translateY(0);
             }
         }
-
         .close-success {
             padding: 1rem 2rem;
             background: var(--accent-orange);
@@ -663,13 +578,10 @@
             transition: all 0.3s;
             animation: slideUp 0.5s 0.9s both;
         }
-
         .close-success:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px var(--accent-orange);
         }
-
-        /* Community Section */
         .community-placeholder {
             text-align: center;
             padding: 5rem 2rem;
@@ -677,14 +589,11 @@
             border: 2px solid var(--violet);
             border-radius: 20px;
         }
-
         .community-placeholder h3 {
             font-size: 2.5rem;
             color: var(--accent-orange);
             margin-bottom: 1rem;
         }
-
-        /* Footer */
         footer {
             background: rgba(10, 0, 21, 0.95);
             padding: 3rem 5%;
@@ -692,14 +601,12 @@
             border-top: 2px solid var(--violet);
             margin-top: 5rem;
         }
-
         .social-links {
             display: flex;
             gap: 2rem;
             justify-content: center;
             margin-bottom: 2rem;
         }
-
         .social-links a {
             color: #fff;
             font-size: 1.5rem;
@@ -714,42 +621,33 @@
             text-decoration: none;
             transition: all 0.3s;
         }
-
-.social-links a:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px var(--accent-orange);
-}
-
-/* ✅ Logo in Navbar */
-.logo-img {
-  height: 45px;
-  width: auto;
-  cursor: pointer;
-  filter: drop-shadow(0 0 10px var(--violet));
-  transition: transform 0.3s, filter 0.3s;
-}
-
-.logo-img:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 15px var(--accent-orange));
-}
-
-/* ✅ Hero Logo */
-.hero-logo-img {
-  width: 220px;
-  max-width: 80%;
-  height: auto;
-  filter: drop-shadow(0 0 35px var(--accent-orange));
-  animation: glowLogo 3s ease-in-out infinite alternate;
-  margin-bottom: 2rem;
-}
-
-@keyframes glowLogo {
-  from { filter: drop-shadow(0 0 20px var(--accent-orange)); }
-  to { filter: drop-shadow(0 0 60px var(--accent-orange)); }
-}
-
-        /* Mobile Responsive */
+        .social-links a:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--accent-orange);
+        }
+        .logo-img {
+          height: 45px;
+          width: auto;
+          cursor: pointer;
+          filter: drop-shadow(0 0 10px var(--violet));
+          transition: transform 0.3s, filter 0.3s;
+        }
+        .logo-img:hover {
+          transform: scale(1.05);
+          filter: drop-shadow(0 0 15px var(--accent-orange));
+        }
+        .hero-logo-img {
+          width: 220px;
+          max-width: 80%;
+          height: auto;
+          filter: drop-shadow(0 0 35px var(--accent-orange));
+          animation: glowLogo 3s ease-in-out infinite alternate;
+          margin-bottom: 2rem;
+        }
+        @keyframes glowLogo {
+          from { filter: drop-shadow(0 0 20px var(--accent-orange)); }
+          to { filter: drop-shadow(0 0 60px var(--accent-orange)); }
+        }
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -762,39 +660,30 @@
                 transition: left 0.3s;
                 border-bottom: 2px solid var(--violet);
             }
-
             .nav-links.active {
                 left: 0;
             }
-
             .mobile-menu {
                 display: flex;
             }
-
             .hero-logo {
                 font-size: 3.5rem;
             }
-
             .typing-text {
                 font-size: 1.2rem;
             }
-
             .section-title {
                 font-size: 2.5rem;
             }
-
             .about-content {
                 grid-template-columns: 1fr;
             }
-
             .members-grid {
                 grid-template-columns: 1fr;
             }
-
             .form-container {
                 padding: 2rem 1.5rem;
             }
-
             .skills-grid {
                 grid-template-columns: 1fr;
             }
@@ -805,20 +694,19 @@
     <div class="animated-bg">
         <div class="particles" id="particles"></div>
     </div>
-
     <nav>
         <div class="nav-container">
             <div class="logo" onclick="showPage('home')">
               <img src="images/logo1.png" alt="CSQUARE³ Logo" class="logo-img">
+              <span style="font-size:1rem; color:#fff; margin-left:6px;">CSQUARE³ <sup>Agency</sup></span>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#members">Members</a></li>
-                <li><a href="#join">Join Us</a></li>
-                <li><a href="#community">Community</a></li>
+                <li><a href="#members">Our Team</a></li>
+                <li><a href="#join">Request a Service</a></li>
+                <li><a href="#community">Portfolio</a></li>
             </ul>
-
             <div class="mobile-menu" id="mobileMenu">
                 <span></span>
                 <span></span>
@@ -826,206 +714,173 @@
             </div>
         </div>
     </nav>
-
     <!-- HOME PAGE -->
     <div id="home" class="page active">
         <div class="hero-logo">
           <img src="images/logo1.png" alt="CSQUARE³ Logo" class="hero-logo-img">
         </div>
-        <div class="typing-text">Code • Create • Compile</div>
-        <a href="#about" class="cta-button">Explore the Club</a>
+        <div class="typing-text">Code • Create • Deliver</div>
+        <a href="#about" class="cta-button">Explore the Agency</a>
     </div>
-
     <!-- ABOUT PAGE -->
     <div id="about" class="page">
         <div class="page-content">
-            <h2 class="section-title">About CSQUARE³</h2>
-            <p class="section-subtitle">Where Innovation Meets Creativity</p>
+            <h2 class="section-title">About CSQUARE³ Agency</h2>
+            <p class="section-subtitle">Digital services & creative solutions</p>
             <div class="about-content">
                 <div class="about-text">
                     <h3>Our Mission</h3>
-                    <p>CSQUARE³ is Annaba's premier technology and creativity club, bringing together passionate students who code, create, and compile innovative solutions. We are a community of developers, designers, filmmakers, and digital artists pushing the boundaries of what's possible.</p>
+                    <p>CSQUARE³ Agency provides high-quality digital services: programming, graphic design, video editing, and photography. We connect clients with talented students and freelancers who deliver professional results.</p>
                     <br>
-                    <p><strong>Based in Annaba, Algeria</strong> – Made by students, for students. We believe in the power of collaboration, continuous learning, and creative expression through technology.</p>
+                    <p><strong>Based in Annaba, Algeria</strong> — We focus on practical outcomes: product-ready websites, strong visual brands, engaging video content, and professional photos.</p>
                     <br>
-                    <h3>What We Do</h3>
-                    <p>• <strong>Coding:</strong> Web & App Development, AI/ML, Competitive Programming<br>
-                    • <strong>Design:</strong> UI/UX, Graphic Design, Branding<br>
-                    • <strong>Film-making:</strong> Video Production, Editing, Storytelling<br>
-                    • <strong>Innovation:</strong> Hackathons, Workshops, Tech Events</p>
+                    <h3>What We Offer</h3>
+                    <p>• <strong>Programming:</strong> Websites, mobile apps, automation, integrations.<br>
+                    • <strong>Graphic Design:</strong> Logos, branding, posters, social visuals.<br>
+                    • <strong>Video:</strong> Editing, promos, short-form content.<br>
+                    • <strong>Photography:</strong> Product, event, portrait shoots.</p>
                 </div>
                 <div class="about-image">
-                    [Team Photo Placeholder]
+                    [Agency Portfolio Placeholder]
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- MEMBERS PAGE -->
+    <!-- MEMBERS / TEAM PAGE -->
     <div id="members" class="page">
         <div class="page-content">
             <h2 class="section-title">Our Team</h2>
-            <p class="section-subtitle">Meet the innovators behind CSQUARE³</p>
-            
-            <!-- 
-            ========================================
-            MEMBERS CONFIGURATION - EDIT HERE
-            ========================================
-            -->
-            
+            <p class="section-subtitle">Meet the talent behind CSQUARE³ Agency</p>
             <div class="members-grid">
                 <!-- MEMBER 1 -->
-                <div class="member-card">
+                <div class="member-card" data-tag="programming">
                     <div class="member-image">
                         <img src="images/taj.jpg" alt="Tedj eddine Ferhat">
                     </div>
                     <h3>Tedj eddine Ferhat</h3>
-                    <p class="member-role">Founder & Leader</p>
+                    <p class="member-role">Founder & Lead Developer</p>
                     <div class="member-socials">
                         <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                         <a href="https://instagram.com/p9hyn8x" target="_blank">Instagram</a>
                     </div>
                 </div>
-
                 <!-- MEMBER 2 -->
-                <div class="member-card">
+                <div class="member-card" data-tag="graphic design">
                     <div class="member-image">
                         <img src="images/amir.jpg" alt="Amir Hachem">
                     </div>
                     <h3>Amir Hachem</h3>
-                    <p class="member-role">Founder & Co-leader & Creative Director</p>
+                    <p class="member-role">Creative Director</p>
                     <div class="member-socials">
                         <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                         <a href="https://instagram.com/__kiooshi__graphics__" target="_blank">Instagram</a>
                     </div>
                 </div>
-
                 <!-- MEMBER 3 -->
-                <div class="member-card">
+                <div class="member-card" data-tag="programming">
                     <div class="member-image">
                         <img src="images/bnr.jpg" alt="Benour Mohamed Amine">
                     </div>
                     <h3>Benour Mohamed Amine</h3>
-                    <p class="member-role">Founder & Co-Leader & Web & App Developer</p>
+                    <p class="member-role">Web & App Developer</p>
                     <div class="member-socials">
                         <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-                        <a href="https://instgram.com/amine0bnr" target="_blank">Instgram</a>
+                        <a href="https://instagram.com/amine0bnr" target="_blank">Instagram</a>
                     </div>
                 </div>
-
                 <!-- MEMBER 4 -->
-                <div class="member-card">
+                <div class="member-card" data-tag="video editing,photography">
                     <div class="member-image">
                         <img src="images/elyas.jpg" alt="Elias Medjdoub">
                     </div>
                     <h3>Elias Medjdoub</h3>
-                    <p class="member-role">Founder & Photographer & Content Creator</p>
+                    <p class="member-role">Photographer & Video Editor</p>
                     <div class="member-socials">
                         <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                         <a href="https://instagram.com/1l.yes" target="_blank">Instagram</a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-
-    <!-- JOIN PAGE -->
+    <!-- REQUEST SERVICE PAGE -->
     <div id="join" class="page">
         <div class="page-content">
-            <h2 class="section-title">Join CSQUARE³</h2>
-            <p class="section-subtitle">Become part of Annaba's tech revolution</p>
+            <h2 class="section-title">Request a Service</h2>
+            <p class="section-subtitle">Tell us what you need — we’ll match you with the right team member</p>
             
             <div class="form-container">
-                <form id="joinForm">
+                <form id="requestForm">
                     <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" name="fullName" required>
+                        <label for="clientName">Client Name *</label>
+                        <input type="text" id="clientName" name="clientName" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="email">University Email *</label>
+                        <label for="email">Email *</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="major">Major / Year *</label>
-                        <input type="text" id="major" name="major" placeholder="e.g., Computer Science - 2nd Year" required>
+                        <label for="phone">Phone Number *</label>
+                        <input type="text" id="phone" name="phone" placeholder="+213..." required>
                     </div>
-
                     <div class="form-group">
-                        <label>Skills & Interests * (Select all that apply)</label>
-                        <div class="skills-grid">
+                        <label>Service Needed (Select primary services)</label>
+                        <div class="skills-grid" id="primaryTags">
+                            <!-- Primary tags will be rendered by JS but keep fallback markup -->
                             <div class="skill-option">
-                                <input type="checkbox" id="skill1" name="skills" value="coding">
-                                <label for="skill1">Coding & Development</label>
+                                <input type="checkbox" id="tagGraphic" data-primary="Graphic Design" class="primary-tag">
+                                <label for="tagGraphic">Graphic Design</label>
                             </div>
                             <div class="skill-option">
-                                <input type="checkbox" id="skill2" name="skills" value="design">
-                                <label for="skill2">Graphic Design</label>
+                                <input type="checkbox" id="tagProgramming" data-primary="Programming" class="primary-tag">
+                                <label for="tagProgramming">Programming</label>
                             </div>
                             <div class="skill-option">
-                                <input type="checkbox" id="skill3" name="skills" value="uiux">
-                                <label for="skill3">UI/UX Design</label>
+                                <input type="checkbox" id="tagVideo" data-primary="Video Editing" class="primary-tag">
+                                <label for="tagVideo">Video Editing</label>
                             </div>
                             <div class="skill-option">
-                                <input type="checkbox" id="skill4" name="skills" value="film">
-                                <label for="skill4">Film-making & Editing</label>
+                                <input type="checkbox" id="tagPhoto" data-primary="Photography" class="primary-tag">
+                                <label for="tagPhoto">Photography</label>
                             </div>
-                            <div class="skill-option">
-                                <input type="checkbox" id="skill5" name="skills" value="ai">
-                                <label for="skill5">AI & Machine Learning</label>
-                            </div>
-                            <div class="skill-option">
-                                <input type="checkbox" id="skill6" name="skills" value="web">
-                                <label for="skill6">Web Development</label>
-                            </div>
-                            <div class="skill-option">
-                                <input type="checkbox" id="skill7" name="skills" value="mobile">
-                                <label for="skill7">Mobile Development</label>
-                            </div>
-                            <div class="skill-option">
-                                <input type="checkbox" id="skill8" name="skills" value="other">
-                                <label for="skill8">Other</label>
+                        </div>
+                        <div style="margin-top:1.5rem;">
+                            <p style="color:#aaa; margin-bottom:8px;">Choose sub-services (appear when you select a primary service):</p>
+                            <div id="subTagsContainer">
+                                <!-- Sub-tag groups populated by JS -->
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="motivation">Why do you want to join CSQUARE³? *</label>
-                        <textarea id="motivation" name="motivation" required></textarea>
+                        <label for="projectDescription">Project Description *</label>
+                        <textarea id="projectDescription" name="projectDescription" required></textarea>
                     </div>
-
-                    <button type="submit" class="submit-btn">Submit Application</button>
+                    <button type="submit" class="submit-btn">Request Service</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- COMMUNITY PAGE -->
+    <!-- PORTFOLIO PAGE -->
     <div id="community" class="page">
         <div class="page-content">
-            <h2 class="section-title">Community</h2>
-            <p class="section-subtitle">Connect, Collaborate, Create</p>
+            <h2 class="section-title">Portfolio</h2>
+            <p class="section-subtitle">Selected works and case studies</p>
             <div class="community-placeholder">
-                <h3>🚀 Forum Coming Soon</h3>
-                <p>We're building an amazing community space where members can share projects, ask questions, and collaborate on exciting ideas.</p>
+                <h3>🚀 Portfolio Coming Soon</h3>
+                <p>We will showcase completed projects here — filter by service type and view details.</p>
                 <p style="margin-top: 2rem; color: var(--accent-orange);">Stay tuned for updates!</p>
             </div>
         </div>
     </div>
-
     <!-- Success Overlay -->
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
             <div class="success-checkmark"></div>
-            <h2>Application Submitted!</h2>
-            <p>Thank you for your interest in CSQUARE³.<br>We'll review your application and get back to you soon.</p>
+            <h2>Request Submitted!</h2>
+            <p>شكراً، تم استلام طلبك. سنتواصل معك قريبا.</p>
             <button class="close-success" onclick="closeSuccess()">Awesome!</button>
         </div>
     </div>
-
     <footer>
         <div class="social-links">
             <a href="https://facebook.com" target="_blank" title="Facebook">f</a>
@@ -1034,13 +889,11 @@
             <a href="https://linkedin.com" target="_blank" title="LinkedIn">in</a>
             <a href="https://github.com" target="_blank" title="GitHub">🐙</a>
         </div>
-        <p>&copy; 2025 CSQUARE³ - Code • Create • Compile</p>
+        <p>&copy; 2025 CSQUARE³ Agency - Code • Create • Deliver</p>
         <p style="margin-top: 1rem; color: var(--violet);">
           Designed & Developed by <strong style="color: var(--accent-orange);">Benour Mohamed Amine</strong> and <strong style="color: var(--accent-orange);">Tedj Eddine Ferhat</strong> — Annaba, Algeria 🇩🇿
         </p>
-
     </footer>
-
     <script>
         // Particle Animation
         const particlesContainer = document.getElementById('particles');
@@ -1052,64 +905,46 @@
             particle.style.animationDelay = Math.random() * 15 + 's';
             particlesContainer.appendChild(particle);
         }
-
-
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
-
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
-
-        // Skill Checkbox Visual Feedback
-        const skillOptions = document.querySelectorAll('.skill-option');
-        skillOptions.forEach(option => {
-            const checkbox = option.querySelector('input[type="checkbox"]');
-            
-            option.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'INPUT') {
-                    checkbox.checked = !checkbox.checked;
-                }
-                option.classList.toggle('checked', checkbox.checked);
-            });
-            
-            checkbox.addEventListener('change', () => {
-                option.classList.toggle('checked', checkbox.checked);
-            });
-        });
-
-
-        // Close success overlay
+        // Page navigation helper
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active');
+            window.location.hash = '#' + id;
+        }
+        // Close success overlay helper (defined early so other scripts can call it)
+        let successOverlay = document.getElementById('successOverlay');
         function closeSuccess() {
-            successOverlay.classList.remove('show');
+            if (successOverlay) successOverlay.classList.remove('show');
             showPage('home');
         }
-
         // Close success overlay when clicking outside
-        successOverlay.addEventListener('click', (e) => {
-            if (e.target === successOverlay) {
-                closeSuccess();
-            }
-        });
+        if (successOverlay) {
+            successOverlay.addEventListener('click', (e) => {
+                if (e.target === successOverlay) {
+                    closeSuccess();
+                }
+            });
+        }
         // Close mobile menu when a link is clicked
         const navLinkItems = document.querySelectorAll('#navLinks a');
-        
         navLinkItems.forEach(link => {
           link.addEventListener('click', () => {
             navLinks.classList.remove('active');
           });
         });
-
     </script>
-
-  
+    <!-- firebase + app logic -->
     <script type="module">
-
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-
-
+    // ----- Firebase config (kept as provided) -----
     const firebaseConfig = {
         apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
         authDomain: "csquare3-club.firebaseapp.com",
@@ -1119,58 +954,185 @@
         appId: "1:910428386089:web:4e5b10d7d23b818547fd38",
         measurementId: "G-6RTLYLFV11"
     };
-
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
-    const joinForm = document.getElementById('joinForm');
-    const successOverlay = document.getElementById('successOverlay');
-
-    joinForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(joinForm);
-        const data = {
-        fullName: formData.get('fullName'),
-        email: formData.get('email'),
-        major: formData.get('major'),
-        skills: formData.getAll('skills'),
-        motivation: formData.get('motivation'),
-        timestamp: new Date()
-        };
-
-        if (data.skills.length === 0) {
-        alert('يرجى اختيار مهارة واحدة على الأقل!');
-        return;
-        }
-
-        const submitBtn = joinForm.querySelector('.submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'جارٍ الإرسال...';
-
-        try {
-        await addDoc(collection(db, "applications"), data);
-
-        successOverlay.classList.add('show');
-
-        joinForm.reset();
-        skillOptions.forEach(opt => opt.classList.remove('checked'));
-
-        } catch (error) {
-        console.error("Firebase Error:", error);
-        alert("حدث خطأ أثناء إرسال الطلب 😕 تحقق من إعدادات Firestore.");
-        } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application';
+    // ----- Team members mapping (can later be fetched from Firestore if needed) -----
+    // Each member has primary tags they work on (lowercase)
+    const teamMembers = [
+        { name: "Tedj", tags: ["programming"] },
+        { name: "Amine", tags: ["programming"] },
+        { name: "Amir", tags: ["graphic design"] },
+        { name: "Elyas", tags: ["video editing", "photography"] }
+    ];
+    // ----- Tags & Sub-tags configuration -----
+    const TAGS = {
+        "Graphic Design": ["Logo Design", "Branding", "Poster Design", "Social Media Visuals"],
+        "Programming": ["Web Development", "Mobile App", "Automation / Scripts", "System Integration"],
+        "Video Editing": ["Short-form / Reels", "Promotional Video", "Cinematic Edit", "Ads"],
+        "Photography": ["Product", "Event", "Portrait"]
+    };
+    // Render sub-tags area
+    const subTagsContainer = document.getElementById('subTagsContainer');
+    function renderSubTags() {
+        subTagsContainer.innerHTML = '';
+        Object.keys(TAGS).forEach(primary => {
+            const group = document.createElement('div');
+            group.className = 'subtag-group';
+            group.style.display = 'none';
+            group.dataset.primary = primary;
+            const title = document.createElement('p');
+            title.style.color = '#fff';
+            title.style.marginBottom = '8px';
+            title.textContent = primary + ':';
+            group.appendChild(title);
+            const grid = document.createElement('div');
+            grid.className = 'skills-grid';
+            TAGS[primary].forEach((sub, idx) => {
+                const id = `sub_${primary.replace(/\s+/g,'_')}_${idx}`;
+                const option = document.createElement('div');
+                option.className = 'skill-option sub-option';
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = id;
+                input.value = `${primary} : ${sub}`; // store as "Primary : Sub"
+                input.className = 'sub-tag-checkbox';
+                const label = document.createElement('label');
+                label.htmlFor = id;
+                label.textContent = sub;
+                option.appendChild(input);
+                option.appendChild(label);
+                grid.appendChild(option);
+                // visual toggle on click
+                option.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'INPUT') {
+                        input.checked = !input.checked;
+                    }
+                    option.classList.toggle('checked', input.checked);
+                });
+                input.addEventListener('change', () => {
+                    option.classList.toggle('checked', input.checked);
+                });
+            });
+            group.appendChild(grid);
+            subTagsContainer.appendChild(group);
+        });
+    }
+    renderSubTags();
+    // Primary tag interactions
+    const primaryTagCheckboxes = document.querySelectorAll('.primary-tag');
+    primaryTagCheckboxes.forEach(cb => {
+        cb.addEventListener('change', (e) => {
+            const primary = cb.dataset.primary;
+            const group = document.querySelector(`.subtag-group[data-primary="${primary}"]`);
+            if (group) {
+                group.style.display = cb.checked ? 'block' : 'none';
+                // if unchecked, clear sub-tags under it
+                if (!cb.checked) {
+                    group.querySelectorAll('input[type="checkbox"]').forEach(i => { i.checked = false; i.parentElement.classList.remove('checked'); });
+                }
+            }
+            // visual toggle for primary options
+            const parent = cb.closest('.skill-option');
+            if (parent) parent.classList.toggle('checked', cb.checked);
+        });
+        // make clicking label toggles checkbox (for cases where clicking outside the input)
+        const parent = cb.closest('.skill-option');
+        if (parent) {
+            parent.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'INPUT') {
+                    cb.checked = !cb.checked;
+                    cb.dispatchEvent(new Event('change'));
+                }
+            });
         }
     });
-            // يسجّل كل زيارة جديدة
+    // Form handling
+    const requestForm = document.getElementById('requestForm');
+    const submitBtn = requestForm.querySelector('.submit-btn');
+    requestForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // Gather fields
+        const clientName = requestForm.clientName.value.trim();
+        const email = requestForm.email.value.trim();
+        const phone = requestForm.phone.value.trim();
+        const projectDescription = requestForm.projectDescription.value.trim();
+        // Gather selected primary tags
+        const selectedPrimary = Array.from(document.querySelectorAll('.primary-tag'))
+            .filter(i => i.checked)
+            .map(i => i.dataset.primary);
+        // Gather selected sub-tags
+        const selectedSub = Array.from(document.querySelectorAll('.sub-tag-checkbox'))
+            .filter(i => i.checked)
+            .map(i => i.value); // values like "Graphic Design : Logo Design"
+        // If no primary selected but sub selected (edge case), infer primaries from sub tags
+        selectedSub.forEach(s => {
+            const parts = s.split(' : ');
+            if (parts[0] && !selectedPrimary.includes(parts[0])) {
+                selectedPrimary.push(parts[0]);
+            }
+        });
+        if (!clientName || !email || !phone || selectedPrimary.length === 0 || projectDescription.length === 0) {
+            alert('Please fill all required fields and select at least one primary service.');
+            return;
+        }
+        // Build serviceTags: include sub-tags when available, otherwise primary alone
+        // Example: ["Programming : Web Development", "Graphic Design"]
+        const serviceTags = [];
+        // add sub-tags first
+        selectedSub.forEach(s => serviceTags.push(s));
+        // add primary-only tags that don't have any selected sub-tags
+        selectedPrimary.forEach(p => {
+            const hasSub = selectedSub.some(s => s.startsWith(p + ' :'));
+            if (!hasSub) serviceTags.push(p);
+        });
+        // Match team members by primary tags (lowercase compare)
+        const matchedMembers = [];
+        selectedPrimary.forEach(p => {
+            const lower = p.toLowerCase();
+            teamMembers.forEach(m => {
+                if (m.tags.includes(lower) && !matchedMembers.includes(m.name)) {
+                    matchedMembers.push(m.name);
+                }
+            });
+        });
+        // Prepare data to send to Firestore
+        const data = {
+            clientName,
+            email,
+            phone,
+            serviceTags,
+            projectDescription,
+            matchedMembers, // array of names
+            status: "Pending",
+            timestamp: new Date()
+        };
+        // UI feedback
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        try {
+            // Save to Firestore collection: serviceRequests
+            await addDoc(collection(db, "serviceRequests"), data);
+            // show success
+            successOverlay.classList.add('show');
+            // reset form UI
+            requestForm.reset();
+            // hide sub-tag groups
+            document.querySelectorAll('.subtag-group').forEach(g => { g.style.display = 'none'; g.querySelectorAll('input').forEach(i => { i.checked = false; i.parentElement.classList.remove('checked'); }); });
+            document.querySelectorAll('.skill-option').forEach(opt => opt.classList.remove('checked'));
+        } catch (error) {
+            console.error("Firebase Error:", error);
+            alert("حدث خطأ أثناء إرسال الطلب — تحقق من إعدادات Firestore.");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Request Service';
+        }
+    });
+    // Log visits (best-effort)
     try {
-    addDoc(collection(db, "visits"), { timestamp: new Date(), userAgent: navigator.userAgent });
+        await addDoc(collection(db, "visits"), { timestamp: new Date(), userAgent: navigator.userAgent });
     } catch (e) {
-    console.log("Visit log failed:", e);
+        console.log("Visit log failed:", e);
     }
     </script>
-
 </body>
 </html>
