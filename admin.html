@@ -29,126 +29,65 @@
       padding:24px;
     }
 
-    /* container */
-    .wrap{
-      max-width:1200px;
-      margin:0 auto;
-    }
+    .wrap{max-width:1200px;margin:0 auto;}
 
-    /* header */
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:18px;
-    }
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .brand img{height:48px; width:auto; filter: drop-shadow(0 0 12px rgba(195,15,69,0.25));}
-    .brand h1{
-      font-size:1.1rem;
-      margin:0;
-      color:var(--text);
-      letter-spacing:0.4px;
-      font-weight:700;
-    }
-    .brand small{display:block;color:var(--muted); font-weight:600; font-size:0.8rem; margin-top:2px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+    .brand{display:flex;gap:12px;align-items:center;}
+    .brand img{height:48px;width:auto;filter: drop-shadow(0 0 12px rgba(195,15,69,0.25));}
+    .brand h1{font-size:1.1rem;margin:0;color:var(--text);letter-spacing:0.4px;font-weight:700;}
+    .brand small{display:block;color:var(--muted);font-weight:600;font-size:0.8rem;margin-top:2px;}
 
-    .controls{display:flex; gap:10px; align-items:center;}
-    .btn{
-      background: linear-gradient(135deg,var(--deep-purple), var(--pink));
-      color:#fff;
-      border:none;
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:700;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-    }
-    .btn.ghost{
-      background: transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:none;
-      font-weight:600;
-    }
-    .btn.warn{background:var(--warning); color:#000;}
+    .controls{display:flex;gap:10px;align-items:center;}
+    .btn{background: linear-gradient(135deg,var(--deep-purple), var(--pink));color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;display:inline-flex;gap:8px;align-items:center;}
+    .btn.ghost{background: transparent;border:1px solid rgba(255,255,255,0.06);box-shadow:none;font-weight:600;}
+    .btn.warn{background:var(--warning);color:#000;}
     .btn.danger{background:var(--danger);}
 
-    /* layout */
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 380px;
-      gap:18px;
-      align-items:start;
-    }
-    .card{
-      background: var(--card-bg);
-      border:1px solid rgba(195,15,69,0.15);
-      padding:16px;
-      border-radius:14px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    }
+    .grid{display:grid;grid-template-columns: 1fr 380px;gap:18px;align-items:start;}
+    .card{background: var(--card-bg);border:1px solid rgba(195,15,69,0.15);padding:16px;border-radius:14px;box-shadow: 0 8px 30px rgba(0,0,0,0.6);}
 
-    /* login box */
-    .login-box{max-width:420px;margin:6vh auto;padding:22px;border-radius:14px;border:1px solid rgba(195,15,69,0.2); text-align:center; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-    .login-box h2{color:var(--pink); margin-bottom:8px;}
-    .login-box input{width:100%; padding:10px 12px; margin:8px 0;border-radius:10px;border:1px solid rgba(255,255,255,0.06); background:#120814; color:var(--text);}
-    .login-box .note{color:var(--muted); font-size:0.9rem; margin-top:6px;}
+    .login-box{max-width:420px;margin:6vh auto;padding:22px;border-radius:14px;border:1px solid rgba(195,15,69,0.2);text-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    .login-box h2{color:var(--pink);margin-bottom:8px;}
+    .login-box input{width:100%;padding:10px 12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:#120814;color:var(--text);}
 
-    /* stats row */
-    .stats{display:flex; gap:12px; align-items:center; justify-content:space-between; margin-bottom:12px;}
-    .stat{
-      flex:1; padding:12px; border-radius:10px; background: linear-gradient(135deg, rgba(195,15,69,0.06), rgba(195,15,69,0.03)); border:1px solid rgba(195,15,69,0.06);
-      text-align:center;
-    }
+    .stats{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px;}
+    .stat{flex:1;padding:12px;border-radius:10px;background: linear-gradient(135deg, rgba(195,15,69,0.06), rgba(195,15,69,0.03));border:1px solid rgba(195,15,69,0.06);text-align:center;}
     .stat h3{margin:0;font-size:1.05rem;color:var(--muted);}
     .stat p{margin:6px 0 0;font-size:1.4rem;font-weight:800;color:var(--text);}
 
-    /* search & tabs */
-    .top-controls{display:flex; gap:12px; margin-bottom:12px; align-items:center;}
-    #searchInput{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06); background:#120814; color:var(--text);}
-    .tabs{display:flex; gap:8px; padding:8px;}
-    .tab{padding:8px 12px;border-radius:10px; background:transparent;border:1px solid rgba(255,255,255,0.03); cursor:pointer; font-weight:700; color:var(--muted);}
-    .tab.active{background:var(--pink); color:#fff;}
+    .top-controls{display:flex;gap:12px;margin-bottom:12px;align-items:center;}
+    #searchInput{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:#120814;color:var(--text);}
+    .tabs{display:flex;gap:8px;padding:8px;}
+    .tab{padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:700;color:var(--muted);}
+    .tab.active{background:var(--pink);color:#fff;}
 
-    /* table */
-    .table-wrap{overflow:auto; margin-top:8px;}
-    table{width:100%; border-collapse:collapse; min-width:900px;}
-    th,td{padding:10px 8px; border-bottom:1px dashed rgba(255,255,255,0.02); text-align:left; font-size:0.95rem; vertical-align:middle;}
-    th{color:var(--muted); font-size:0.85rem; background:rgba(0,0,0,0.02);}
+    .table-wrap{overflow:auto;margin-top:8px;}
+    table{width:100%;border-collapse:collapse;min-width:900px;}
+    th,td{padding:10px 8px;border-bottom:1px dashed rgba(255,255,255,0.02);text-align:left;font-size:0.95rem;vertical-align:middle;}
+    th{color:var(--muted);font-size:0.85rem;background:rgba(0,0,0,0.02);}
     td.tags{max-width:260px;}
-    .tag{display:inline-block; padding:6px 8px; border-radius:8px; background:rgba(195,15,69,0.12); color:var(--pink); font-weight:700; margin:2px 4px; font-size:0.8rem;}
-    .action-btn{padding:6px 8px; border-radius:8px; border:none; cursor:pointer; margin-right:6px; font-weight:700;}
+    .tag{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(195,15,69,0.12);color:var(--pink);font-weight:700;margin:2px 4px;font-size:0.8rem;}
+    .action-btn{padding:6px 8px;border-radius:8px;border:none;cursor:pointer;margin-right:6px;font-weight:700;}
+    .action-btn.inprogress{background:linear-gradient(90deg,#8b5cf6,#06b6d4);color:#fff;}
+    .action-btn.complete{background:var(--success);color:#fff;}
+    .action-btn.reject{background:var(--danger);color:#fff;}
+    .action-btn.delete{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);}
 
-    .action-btn.inprogress{background:linear-gradient(90deg,#8b5cf6,#06b6d4); color:#fff;}
-    .action-btn.complete{background:var(--success); color:#fff;}
-    .action-btn.reject{background:var(--danger); color:#fff;}
-    .action-btn.delete{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted);}
-
-    /* right column */
     .right-col .section{margin-bottom:12px;}
-    .small{font-size:0.85rem; color:var(--muted);}
+    .small{font-size:0.85rem;color:var(--muted);}
 
-    /* logs tables */
-    .small-table{width:100%; border-collapse:collapse;}
-    .small-table th, .small-table td{padding:8px; border:1px solid rgba(255,255,255,0.03); font-size:0.85rem;}
+    .small-table{width:100%;border-collapse:collapse;}
+    .small-table th,.small-table td{padding:8px;border:1px solid rgba(255,255,255,0.03);font-size:0.85rem;}
 
-    /* toasts */
-    .toasts{position:fixed; right:20px; bottom:20px; display:flex; flex-direction:column; gap:8px; z-index:9999;}
-    .toast{background:#111; border-left:4px solid var(--pink); padding:10px 12px; border-radius:8px; color:#fff; box-shadow:0 6px 20px rgba(0,0,0,0.6); min-width:220px;}
+    /* toasts top-right */
+    .toasts{position:fixed;right:20px;top:20px;display:flex;flex-direction:column;gap:8px;z-index:9999;align-items:flex-end;}
+    .toast{background:#111;border-left:4px solid var(--pink);padding:10px 12px;border-radius:8px;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.6);min-width:220px;opacity:1;transition:transform .25s,opacity .25s;}
     .toast.success{border-left-color:var(--success);}
     .toast.warn{border-left-color:var(--warning);}
-    .toast.hide{opacity:0; transform:translateY(8px); transition:0.25s;}
+    .toast.hide{opacity:0;transform:translateY(-8px);}
 
-    /* small helpers */
     .muted{color:var(--muted)}
-    .flex{display:flex; gap:8px; align-items:center;}
+    .flex{display:flex;gap:8px;align-items:center;}
     .right{margin-left:auto}
     .center{text-align:center}
     @media (max-width:980px){
@@ -159,9 +98,7 @@
   </style>
 </head>
 <body>
-
   <div class="wrap">
-    <!-- Header -->
     <header>
       <div class="brand">
         <img src="images/logo1.png" alt="logo">
@@ -179,27 +116,14 @@
       </div>
     </header>
 
-    <!-- Content -->
     <div class="grid">
-      <!-- main column -->
       <div class="card">
-        <!-- stats -->
         <div class="stats">
-          <div class="stat">
-            <h3>Service Requests</h3>
-            <p id="count">0</p>
-          </div>
-          <div class="stat">
-            <h3>Visitors</h3>
-            <p id="visitsCount">0</p>
-          </div>
-          <div class="stat">
-            <h3>Pending</h3>
-            <p id="pendingCount">0</p>
-          </div>
+          <div class="stat"><h3>Service Requests</h3><p id="count">0</p></div>
+          <div class="stat"><h3>Visitors</h3><p id="visitsCount">0</p></div>
+          <div class="stat"><h3>Pending</h3><p id="pendingCount">0</p></div>
         </div>
 
-        <!-- top controls -->
         <div class="top-controls">
           <input id="searchInput" placeholder="🔍 Search by client, email or service..." />
           <div class="tabs" id="tabs">
@@ -207,10 +131,13 @@
             <div class="tab" data-status="pending">Pending</div>
             <div class="tab" data-status="in_progress">In Progress</div>
             <div class="tab" data-status="completed">Completed</div>
+            <div class="tab" data-status="graphic design">Graphic</div>
+            <div class="tab" data-status="programming">Programming</div>
+            <div class="tab" data-status="video editing">Video</div>
+            <div class="tab" data-status="photography">Photo</div>
           </div>
         </div>
 
-        <!-- table -->
         <div class="table-wrap">
           <table id="requestsTable">
             <thead>
@@ -229,7 +156,6 @@
         </div>
       </div>
 
-      <!-- right column -->
       <div class="right-col">
         <div class="card section">
           <h3 style="margin-top:0">Quick Tools</h3>
@@ -243,40 +169,30 @@
         <div class="card section">
           <h3 style="margin-top:0">Admin Logs</h3>
           <p class="small">Recent admin login activity</p>
-          <div style="margin-top:10px; max-height:200px; overflow:auto;">
-            <table class="small-table" id="adminLogsTable">
-              <thead><tr><th>Email</th><th>IP</th><th>When</th></tr></thead>
-              <tbody></tbody>
-            </table>
+          <div style="margin-top:10px;max-height:200px;overflow:auto;">
+            <table class="small-table" id="adminLogsTable"><thead><tr><th>Email</th><th>IP</th><th>When</th></tr></thead><tbody></tbody></table>
           </div>
-          <div style="margin-top:8px; font-size:0.85rem; color:var(--muted)">
-            Only SUPER admin sees detailed logs.
-          </div>
+          <div style="margin-top:8px;font-size:0.85rem;color:var(--muted)">Only SUPER admin sees detailed logs.</div>
         </div>
 
         <div class="card section">
           <h3 style="margin-top:0">Application Logs</h3>
           <p class="small">Action history (delete/status updates)</p>
-          <div style="margin-top:10px; max-height:200px; overflow:auto;">
-            <table class="small-table" id="appLogsTable">
-              <thead><tr><th>Action</th><th>Target</th><th>By</th><th>When</th></tr></thead>
-              <tbody></tbody>
-            </table>
+          <div style="margin-top:10px;max-height:200px;overflow:auto;">
+            <table class="small-table" id="appLogsTable"><thead><tr><th>Action</th><th>Target</th><th>By</th><th>When</th></tr></thead><tbody></tbody></table>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- login modal (simple) -->
-  <div id="loginModal" class="login-box" style="display:none;">
+  <!-- login modal -->
+  <div id="loginModal" class="login-box" style="display:block;">
     <h2>Admin Login</h2>
     <input id="adminEmail" type="email" placeholder="admin email" />
     <input id="adminPassword" type="password" placeholder="password" />
-    <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
       <button class="btn" id="loginBtn">Login</button>
-      <button class="btn ghost" id="closeLogin">Close</button>
     </div>
     <p class="note">You need an admin account (Firebase Auth) to access.</p>
     <p id="loginError" style="color:#ff6b6b"></p>
@@ -286,15 +202,14 @@
   <div class="toasts" id="toasts"></div>
 
   <script type="module">
-    // Firebase imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
     import {
       getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot,
-      doc, updateDoc, deleteDoc, where, getDoc, limit
+      doc, updateDoc, deleteDoc, where, limit
     } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
-    // Firebase config (kept same)
+    // Firebase config (unchanged)
     const firebaseConfig = {
       apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
       authDomain: "csquare3-club.firebaseapp.com",
@@ -308,12 +223,13 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const auth = getAuth(app);
+
+    // Super admin same as old
     const SUPER_ADMIN = "admin@csquare3.club";
 
     // DOM
     const loginModal = document.getElementById('loginModal');
     const loginBtn = document.getElementById('loginBtn');
-    const closeLogin = document.getElementById('closeLogin');
     const adminEmailInput = document.getElementById('adminEmail');
     const adminPasswordInput = document.getElementById('adminPassword');
     const loginError = document.getElementById('loginError');
@@ -336,18 +252,17 @@
 
     const newRequestSeed = document.getElementById('newRequestSeed');
     const clearAllBtn = document.getElementById('clearAllBtn');
-
-    // small UI helpers
     const toasts = document.getElementById('toasts');
-    function showToast(message, type='info', timeout=4000){
+
+    // helpers
+    function showToast(message, type='info', timeout=3500){
       const div = document.createElement('div');
       div.className = 'toast ' + (type==='success'?'success': type==='warn'?'warn':'');
       div.textContent = message;
-      toasts.appendChild(div);
+      toasts.prepend(div);
       setTimeout(()=> { div.classList.add('hide'); setTimeout(()=>div.remove(),300); }, timeout);
     }
 
-    // audio beep using WebAudio API
     let audioEnabled = true;
     audioToggle.addEventListener('click', () => {
       audioEnabled = !audioEnabled;
@@ -371,17 +286,22 @@
     }
 
     // state
-    let serviceRequests = []; // local cache
+    let serviceRequests = [];
     let seenIds = new Set();
+    let unsubscribeRequests = null;
     let currentFilter = 'all';
 
-    // require auth on load
-    (function init(){
-      loginModal.style.display = 'block';
-      document.getElementById('logoutBtn').style.display = 'none';
-    })();
+    // mark existing seen (so initial load doesn't beep)
+    async function initialMarkSeen(){
+      try{
+        const q = query(collection(db, "serviceRequests"), orderBy("timestamp","desc"), limit(200));
+        const snap = await getDocs(q);
+        snap.forEach(d => seenIds.add(d.id));
+      }catch(e){}
+    }
+    initialMarkSeen();
 
-    // login flow
+    // auth / login
     loginBtn.addEventListener('click', async () => {
       loginError.textContent = '';
       const email = adminEmailInput.value.trim();
@@ -396,69 +316,76 @@
         }catch(e){}
         loginModal.style.display = 'none';
         document.getElementById('logoutBtn').style.display = 'inline-flex';
-        showToast('Logged in as ' + cred.user.email, 'success', 2500);
+        showToast('Logged in as ' + cred.user.email, 'success', 2200);
       }catch(err){
         console.error(err);
         loginError.textContent = 'Invalid credentials or network error';
       }
     });
 
-    closeLogin.addEventListener('click', ()=> { loginModal.style.display = 'none'; showToast('Login cancelled', 'warn', 1500); });
-
+    // sign out
     logoutBtn.addEventListener('click', async ()=>{
       await signOut(auth);
       loginModal.style.display = 'block';
       document.getElementById('logoutBtn').style.display = 'none';
       showToast('Logged out', 'info', 1800);
+      if(typeof unsubscribeRequests === 'function') unsubscribeRequests(); // stop listener
+      serviceRequests = [];
+      renderTable();
     });
 
-    // auth state
+    // onAuthStateChanged — only subscribe when user exists
     onAuthStateChanged(auth, async (user) => {
       if(user){
+        // hide login
+        loginModal.style.display = 'none';
         document.getElementById('logoutBtn').style.display = 'inline-flex';
+        // show logs only if super admin
         if(user.email === SUPER_ADMIN){
-          // super admin can view logs
+          // load admin logs + app logs
+          loadAdminLogs();
+          loadAppLogs();
         }
-        setupRealtimeListener(); // start listening
+        setupRealtimeListener();
         loadVisitsCount();
-        loadAdminLogs();
-        loadAppLogs();
       } else {
-        // not signed
+        // show login modal
+        loginModal.style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'none';
+        if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
       }
     });
 
-    // realtime listener for serviceRequests (plays audio on new request or status change)
-    let unsubscribeRequests = null;
+    // realtime listener
     function setupRealtimeListener(){
-      if(unsubscribeRequests) unsubscribeRequests();
-      const q = query(collection(db, "serviceRequests"), orderBy("timestamp", "desc"));
+      if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
+      const q = query(collection(db, "serviceRequests"), orderBy("timestamp","desc"));
       unsubscribeRequests = onSnapshot(q, (snap) => {
         const docs = [];
         let newDetected = false;
         let statusChangedCount = 0;
+        const prevStatus = new Map(serviceRequests.map(r=>[r.id, r.status]));
         snap.forEach(docSnap => {
           const d = docSnap.data();
           d.id = docSnap.id;
+          // normalize status field
+          d.status = d.status || 'pending';
           docs.push(d);
-          // if unseen id -> new request
           if(!seenIds.has(d.id)){
             seenIds.add(d.id);
             newDetected = true;
           }
         });
 
-        // detect status changes by comparing saved cache
-        const prevMap = new Map(serviceRequests.map(r=>[r.id, r.status]));
+        // detect status changes
         docs.forEach(d => {
-          const prev = prevMap.get(d.id);
-          if(prev && prev !== d.status) statusChangedCount++;
+          const before = prevStatus.get(d.id);
+          if(before && before !== d.status) statusChangedCount++;
         });
 
         serviceRequests = docs;
         renderTable();
 
-        // toasts + audio
         if(newDetected){
           showToast('New service request received ✅', 'success', 3500);
           playBeep('short');
@@ -467,8 +394,6 @@
           showToast('Some request statuses changed ⚙️', 'info', 3000);
           playBeep('long');
         }
-
-        // statistics
         updateStats();
       }, (err)=> {
         console.error('Listener error', err);
@@ -476,11 +401,20 @@
       });
     }
 
-    // render table
+    // render table safely and attach handlers using event delegation
     function renderTable(){
       const q = (searchInput.value || '').toLowerCase().trim();
       const filtered = serviceRequests.filter(r=>{
-        if(currentFilter !== 'all' && (r.status || 'pending') !== currentFilter) return false;
+        // top-level filter by tab status or tag
+        if(currentFilter !== 'all'){
+          // if filter is one of tag names (graphic design etc.)
+          const tagsLower = (r.serviceTags || []).map(t=>t.toLowerCase());
+          if(['graphic design','programming','video editing','photography'].includes(currentFilter)){
+            if(!tagsLower.some(t => t.includes(currentFilter.split(' ')[0]))) return false;
+          } else {
+            if((r.status || 'pending') !== currentFilter) return false;
+          }
+        }
         if(!q) return true;
         return (r.clientName && r.clientName.toLowerCase().includes(q))
                || (r.email && r.email.toLowerCase().includes(q))
@@ -492,486 +426,183 @@
       tbody.innerHTML = '';
       filtered.forEach(r=>{
         const tr = document.createElement('tr');
-
         const tagsHtml = (r.serviceTags || []).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join(' ');
-
         tr.innerHTML = `
           <td>${escapeHtml(r.clientName || '-')}</td>
           <td>${escapeHtml(r.email || '-')}</td>
           <td>${escapeHtml(r.phone || '-')}</td>
           <td class="tags">${tagsHtml}</td>
           <td style="max-width:260px">${escapeHtml(truncate(r.projectDescription || '-', 200))}</td>
-          <td style="font-weight:800; text-transform:capitalize;">
-            ${statusBadge(r.status || 'pending')}
-          </td>
+          <td style="font-weight:800;text-transform:capitalize">${statusBadge(r.status || 'pending')}</td>
           <td>
-            <button class="action-btn inprogress" title="Mark In Progress">▶️</button>
-            <button class="action-btn complete" title="Mark Completed">✔️</button>
-            <button class="action-btn reject" title="Reject">❌</button>
-            <button class="action-btn delete" title="Delete">🗑️</button>
+            <button class="action-btn inprogress" data-id="${r.id}" data-action="in_progress" title="Mark In Progress">▶️</button>
+            <button class="action-btn complete" data-id="${r.id}" data-action="completed" title="Mark Completed">✔️</button>
+            <button class="action-btn reject" data-id="${r.id}" data-action="rejected" title="Reject">❌</button>
+            <button class="action-btn delete" data-id="${r.id}" data-action="deleted" title="Delete">🗑️</button>
           </td>
         `;
-
-        // actions
-        const inBtn = tr.querySelector('.inprogress');
-        const compBtn = tr.querySelector('.complete');
-        const rejBtn = tr.querySelector('.reject');
-        const delBtn = tr.querySelector('.delete');
-
-        inBtn.addEventListener('click', ()=> changeStatus(r, 'in_progress'));
-        compBtn.addEventListener('click', ()=> changeStatus(r, 'completed'));
-        rejBtn.addEventListener('click', ()=>      color: var(--pink);
+        tbody.appendChild(tr);
+      });
+      // update visible counts
+      countEl.textContent = serviceRequests.length;
+      pendingCountEl.textContent = serviceRequests.filter(s=> (s.status||'pending') === 'pending').length;
     }
 
-    input {
-      width: 90%;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 10px;
-      border: 2px solid var(--pink);
-      background: #1c0f1c;
-      color: var(--text-light);
-      font-size: 1rem;
-    }
+    // event delegation for action buttons (works after every render)
+    requestsBody.addEventListener('click', async (e) => {
+      const btn = e.target.closest('button[data-id]');
+      if(!btn) return;
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      const req = serviceRequests.find(r=>r.id === id);
+      if(!req){ showToast('Request not found', 'warn'); return; }
 
-    button {
-      background: linear-gradient(135deg, var(--deep-purple), var(--pink));
-      color: #fff;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.3s;
-      margin-top: 0.5rem;
-    }
-
-    button:hover {
-      background: var(--pink);
-      box-shadow: 0 0 20px var(--pink);
-    }
-
-    .dashboard {
-      max-width: 1100px;
-      margin-top: 4rem;
-      padding: 2rem 3rem;
-      background: rgba(35, 17, 35, 0.5);
-      border: 1px solid var(--pink);
-    }
-
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      background: rgba(195, 15, 69, 0.15);
-      border: 1px solid var(--pink);
-      border-radius: 15px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    #searchInput {
-      width: 100%;
-      padding: 0.8rem;
-      border-radius: 10px;
-      border: 2px solid var(--pink);
-      background: #1a0f1b;
-      color: var(--text-light);
-      margin-bottom: 1rem;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 1rem;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 0.5rem;
-      border-radius: 10px;
-      cursor: pointer;
-      border: 1px solid var(--pink);
-      background: rgba(35, 17, 35, 0.3);
-      color: var(--text-light);
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .tab-btn.active {
-      background: var(--pink);
-      color: #fff;
-    }
-
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px;
-      color: var(--text-light);
-    }
-
-    th, td {
-      border: 1px solid var(--pink);
-      padding: 0.7rem;
-      text-align: left;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-
-    th {
-      background: rgba(195, 15, 69, 0.3);
-    }
-
-    td button {
-      margin: 0 2px;
-      padding: 0.3rem 0.5rem;
-      font-size: 0.8rem;
-      border-radius: 8px;
-    }
-
-    .logout-btn {
-      background: #d90035;
-      margin-top: 1rem;
-    }
-
-    .admin-logs, .app-logs {
-      background: rgba(35, 17, 35, 0.5);
-      padding: 1rem;
-      border-radius: 15px;
-      margin-top: 2rem;
-      display: none;
-    }
-
-    #errorMsg {
-      color: #ff4040;
-      margin-top: 1rem;
-    }
-
-    .admin-section-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .dashboard {
-        padding: 1rem;
+      if(action === 'deleted'){
+        const reason = prompt('Reason for deletion (required):');
+        if(!reason || !reason.trim()){ alert('Deletion cancelled — reason is required.'); return; }
+        try{
+          await deleteDoc(doc(db, 'serviceRequests', id));
+          await addDoc(collection(db, 'app_logs'), { action: 'deleted', targetEmail: req.email || null, performedBy: auth.currentUser ? auth.currentUser.email : 'unknown', reason: reason.trim(), timestamp: new Date() });
+          showToast('Request deleted', 'warn', 2500);
+        }catch(e){ console.error(e); showToast('Delete failed', 'warn', 2000); }
+        return;
       }
-      .stats {
-        flex-direction: column;
-        gap: 10px;
-      }
-      table {
-        min-width: 500px;
-      }
+
+      // status changes
+      try{
+        await updateDoc(doc(db, 'serviceRequests', id), { status: action });
+        await addDoc(collection(db, 'app_logs'), { action: 'status_update', targetEmail: req.email || null, performedBy: auth.currentUser ? auth.currentUser.email : 'unknown', reason: `status set to ${action}`, timestamp: new Date() });
+        showToast('Status updated', 'success', 1800);
+      }catch(e){ console.error(e); showToast('Update failed', 'warn', 2200); }
+    });
+
+    // status badge
+    function statusBadge(s){
+      const map = {
+        pending: `<span style="color:${getComputedStyle(document.documentElement).getPropertyValue('--muted')};">Pending</span>`,
+        in_progress: `<span style="color:#06b6d4;font-weight:800">In Progress</span>`,
+        completed: `<span style="color:${getComputedStyle(document.documentElement).getPropertyValue('--success')}; font-weight:800">Completed</span>`,
+        rejected: `<span style="color:${getComputedStyle(document.documentElement).getPropertyValue('--danger')}; font-weight:800">Rejected</span>`
+      };
+      return map[s] || `<span style="color:var(--muted)">${escapeHtml(s || '')}</span>`;
     }
-  </style>
-</head>
 
-<body>
-  <!-- LOGIN -->
-  <div class="login-box" id="loginBox">
-    <h2>Admin Login</h2>
-    <input type="email" id="adminEmail" placeholder="Email">
-    <input type="password" id="adminPassword" placeholder="Password">
-    <button id="loginBtn">Login</button>
-    <p id="errorMsg"></p>
-  </div>
+    // search & tabs
+    searchInput.addEventListener('input', renderTable);
+    document.querySelectorAll('.tab').forEach(t=>{
+      t.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+        currentFilter = t.dataset.status;
+        renderTable();
+      });
+    });
 
-  <!-- DASHBOARD -->
-  <div class="dashboard" id="dashboard" style="display:none;">
-    <h2>CSQUARE³ Admin Dashboard</h2>
-    <div class="stats">
-      <div>🧩 Applications: <strong id="count">0</strong></div>
-      <div>👀 Visitors: <strong id="visitsCount">0</strong></div>
-    </div>
+    // export CSV
+    downloadBtn.addEventListener('click', ()=> {
+      const rows = [['Client Name','Email','Phone','Service Tags','Project Description','Status','Timestamp']];
+      serviceRequests.forEach(r=>{
+        rows.push([
+          r.clientName || '',
+          r.email || '',
+          r.phone || '',
+          (r.serviceTags || []).join('; '),
+          (r.projectDescription || '').replace(/\n/g,' '),
+          r.status || 'pending',
+          r.timestamp ? (r.timestamp.seconds ? new Date(r.timestamp.seconds*1000).toLocaleString() : new Date(r.timestamp).toLocaleString()) : ''
+        ]);
+      });
+      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'serviceRequests_export.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast('CSV exported', 'success');
+    });
 
-    <div class="admin-section-buttons">
-      <button id="downloadBtn">⬇️ Download CSV</button>
-      <button id="logsBtn" style="display:none;">📜 View Admin Logs</button>
-      <button id="appLogsBtn" style="display:none;">📋 View Applications Logs</button>
-    </div>
+    // visits count
+    async function loadVisitsCount(){
+      try{
+        const snap = await getDocs(collection(db, 'visits'));
+        visitsCountEl.textContent = snap.size;
+      }catch(e){}
+    }
 
-    <div class="tabs">
-      <div class="tab-btn active" data-status="all">All</div>
-      <div class="tab-btn" data-status="pending">Pending</div>
-      <div class="tab-btn" data-status="accepted">Accepted ✅</div>
-      <div class="tab-btn" data-status="rejected">Rejected ❌</div>
-      <div class="tab-btn" data-status="contacted">Contacted 📞</div>
-    </div>
-
-    <input type="text" id="searchInput" placeholder="🔍 Search by name, email, major or skill...">
-
-    <div class="table-container">
-      <table id="appTable">
-        <tr><th>Full Name</th><th>Email</th><th>Major</th><th>Skills</th><th>Motivation</th><th>Status</th><th>Actions</th></tr>
-      </table>
-    </div>
-
-    <div class="admin-logs" id="adminLogs">
-      <h3>Admin Login Activity</h3>
-      <div class="table-container">
-        <table id="logsTable">
-          <tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="app-logs" id="appLogs">
-      <h3>Applications Logs</h3>
-      <div class="table-container">
-        <table id="appLogsTable">
-          <tr><th>Action</th><th>Target Email</th><th>Performed By</th><th>Reason</th><th>Timestamp</th></tr>
-        </table>
-      </div>
-    </div>
-
-    <button class="logout-btn" id="logoutBtn">Logout</button>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, orderBy, query, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
-      authDomain: "csquare3-club.firebaseapp.com",
-      projectId: "csquare3-club",
-      storageBucket: "csquare3-club.firebasestorage.app",
-      messagingSenderId: "910428386089",
-      appId: "1:910428386089:web:4e5b10d7d23b818547fd38"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-    const SUPER_ADMIN = "admin@csquare3.club";
-
-    const loginBox = document.getElementById('loginBox');
-    const dashboard = document.getElementById('dashboard');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const errorMsg = document.getElementById('errorMsg');
-    const countEl = document.getElementById('count');
-    const visitsEl = document.getElementById('visitsCount');
-    const table = document.getElementById("appTable");
-    const downloadBtn = document.getElementById('downloadBtn');
-    const searchInput = document.getElementById('searchInput');
-    const logsBtn = document.getElementById('logsBtn');
-    const appLogsBtn = document.getElementById('appLogsBtn');
-    const adminLogs = document.getElementById('adminLogs');
-    const logsTable = document.getElementById('logsTable');
-    const appLogs = document.getElementById('appLogs');
-    const appLogsTable = document.getElementById('appLogsTable');
-    const tabButtons = document.querySelectorAll('.tab-btn');
-
-    let appData = [];
-    let currentFilter = "all";
-
-    // LOGIN
-    loginBtn.addEventListener('click', async () => {
-      const email = document.getElementById('adminEmail').value.trim();
-      const password = document.getElementById('adminPassword').value.trim();
-
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // Always log login for all admins
-        let ipAddress = "Unknown";
-        try {
-          const res = await fetch("https://api.ipify.org?format=json");
-          const d = await res.json();
-          ipAddress = d.ip;
-        } catch {}
-
-        await addDoc(collection(db, "admin_logs"), {
-          email: user.email,
-          ip: ipAddress,
-          timestamp: new Date(),
-          userAgent: navigator.userAgent
+    // admin logs / app logs (latest 10)
+    async function loadAdminLogs(){
+      try{
+        const q = query(collection(db, 'admin_logs'), orderBy('timestamp','desc'));
+        const snap = await getDocs(q);
+        adminLogsTable.innerHTML = '';
+        let c=0;
+        snap.forEach(d=>{
+          if(c++ > 10) return;
+          const l=d.data();
+          const when = l.timestamp ? (l.timestamp.seconds ? new Date(l.timestamp.seconds*1000).toLocaleString() : new Date(l.timestamp).toLocaleString()) : '-';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td style="font-weight:700">${escapeHtml(l.email||'-')}</td><td>${escapeHtml(l.ip||'-')}</td><td>${when}</td>`;
+          adminLogsTable.appendChild(tr);
         });
-
-        errorMsg.textContent = '';
-      } catch (error) {
-        errorMsg.textContent = 'Invalid credentials ❌';
-      }
-    });
-
-    logoutBtn.addEventListener('click', async () => {
-      await signOut(auth);
-      dashboard.style.display = 'none';
-      loginBox.style.display = 'block';
-    });
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        loginBox.style.display = 'none';
-        dashboard.style.display = 'block';
-        if (user.email === SUPER_ADMIN) {
-          logsBtn.style.display = 'inline-block';
-          appLogsBtn.style.display = 'inline-block';
-        }
-        await loadApplications();
-        await loadVisits();
-      } else {
-        dashboard.style.display = 'none';
-        loginBox.style.display = 'block';
-      }
-    });
-
-    async function loadApplications() {
-      const snapshot = await getDocs(collection(db, "applications"));
-      appData = [];
-      snapshot.forEach(docSnap => {
-        const d = docSnap.data();
-        d.docId = docSnap.id;
-        if (!d.status) d.status = "pending";
-        if (!Array.isArray(d.skills)) d.skills = d.skills ? [d.skills] : [];
-        appData.push(d);
-      });
-      renderTable(appData);
-      countEl.textContent = appData.length;
+      }catch(e){ console.error(e); }
     }
 
-    async function loadVisits() {
-      const visitsSnapshot = await getDocs(collection(db, "visits"));
-      visitsEl.textContent = visitsSnapshot.size;
-    }
-
-    function renderTable(data) {
-      const searchValue = searchInput.value.toLowerCase().trim();
-      const filteredByStatus = data.filter(d => currentFilter === "all" || d.status === currentFilter);
-      const finalData = filteredByStatus.filter(d =>
-        d.fullName.toLowerCase().includes(searchValue) ||
-        d.email.toLowerCase().includes(searchValue) ||
-        (d.major && d.major.toLowerCase().includes(searchValue)) ||
-        (d.skills && d.skills.join(", ").toLowerCase().includes(searchValue))
-      );
-
-      table.innerHTML = `
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Major</th>
-          <th>Skills</th>
-          <th>Motivation</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      `;
-
-      finalData.forEach(d => {
-        const statusColor = {
-          pending: '#9B59B6',
-          accepted: '#28a745',
-          rejected: '#dc3545',
-          contacted: '#ffc107'
-        }[d.status] || '#c30f45';
-
-        const row = table.insertRow();
-        row.innerHTML = `
-          <td>${d.fullName}</td>
-          <td>${d.email}</td>
-          <td>${d.major || '-'}</td>
-          <td>${(d.skills || []).join(", ")}</td>
-          <td>${d.motivation || '-'}</td>
-          <td style="color:${statusColor}; font-weight:bold; text-transform:capitalize;">
-            ${d.status || "Pending"}
-          </td>
-          <td>
-            <button class="accept-btn">✅</button>
-            <button class="reject-btn">❌</button>
-            <button class="contact-btn">📞</button>
-            <button class="delete-btn">🗑️</button>
-          </td>
-        `;
-
-        const docRef = d.docId;
-
-        const perform = async (action, update = {}, reason = "") => {
-          if (action === "deleted") {
-            await deleteDoc(doc(db, "applications", docRef));
-          } else {
-            if (Object.keys(update).length) await updateDoc(doc(db, "applications", docRef), update);
-          }
-
-          await addDoc(collection(db, "app_logs"), {
-            action,
-            performedBy: auth.currentUser ? auth.currentUser.email : "unknown",
-            targetEmail: d.email,
-            reason,
-            timestamp: new Date()
-          });
-
-          if (update.status) d.status = update.status;
-          if (action === "deleted") appData = appData.filter(a => a.docId !== docRef);
-          renderTable(appData);
-        };
-
-        row.querySelector('.accept-btn').addEventListener('click', () => perform("accepted", { status: "accepted" }));
-        row.querySelector('.reject-btn').addEventListener('click', () => perform("rejected", { status: "rejected" }));
-        row.querySelector('.contact-btn').addEventListener('click', () => perform("contacted", { status: "contacted" }));
-        row.querySelector('.delete-btn').addEventListener('click', async () => {
-          const reason = prompt("Reason for deletion:");
-          if (reason && reason.trim()) await perform("deleted", {}, reason.trim());
-          else alert("Please provide a reason for deletion.");
+    async function loadAppLogs(){
+      try{
+        const q = query(collection(db, 'app_logs'), orderBy('timestamp','desc'));
+        const snap = await getDocs(q);
+        appLogsTable.innerHTML = '';
+        let c=0;
+        snap.forEach(d=>{
+          if(c++ > 10) return;
+          const l=d.data();
+          const when = l.timestamp ? (l.timestamp.seconds ? new Date(l.timestamp.seconds*1000).toLocaleString() : new Date(l.timestamp).toLocaleString()) : '-';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${escapeHtml(l.action||'-')}</td><td>${escapeHtml(l.targetEmail||'-')}</td><td>${escapeHtml(l.performedBy||'-')}</td><td>${when}</td>`;
+          appLogsTable.appendChild(tr);
         });
-      });
+      }catch(e){ console.error(e); }
     }
 
-    searchInput.addEventListener('input', () => renderTable(appData));
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.status;
-        renderTable(appData);
-      });
+    // refresh button
+    refreshBtn.addEventListener('click', async ()=>{
+      showToast('Refreshing...', 'info', 1000);
+      if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
+      setupRealtimeListener();
+      loadVisitsCount();
+      loadAdminLogs();
+      loadAppLogs();
     });
 
-    logsBtn.addEventListener('click', async () => {
-      const q = query(collection(db, "admin_logs"), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-      logsTable.innerHTML = '<tr><th>Email</th><th>IP Address</th><th>Timestamp</th><th>Device</th></tr>';
-      snapshot.forEach(d => {
-        const l = d.data();
-        const date = l.timestamp
-          ? (l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : new Date(l.timestamp).toLocaleString())
-          : '-';
-        logsTable.insertRow().innerHTML = `<td>${l.email}</td><td>${l.ip || "N/A"}</td><td>${date}</td><td>${l.userAgent || '-'}</td>`;
-      });
-      adminLogs.style.display = 'block';
-      appLogs.style.display = 'none';
+    // seed test
+    newRequestSeed.addEventListener('click', async () => {
+      try{
+        await addDoc(collection(db, 'serviceRequests'), {
+          clientName: 'Test Client ' + Math.floor(Math.random()*999),
+          email: 'test+'+Math.floor(Math.random()*999)+'@example.com',
+          phone: '+2136' + Math.floor(10000000 + Math.random()*89999999),
+          serviceTags: ['Graphic Design : Logo Design'],
+          projectDescription: 'This is a seeded test request.',
+          status: 'pending',
+          timestamp: new Date()
+        });
+        showToast('Test request added', 'success', 1800);
+      }catch(e){ console.error(e); showToast('Seed failed', 'warn'); }
     });
 
-    appLogsBtn.addEventListener('click', async () => {
-      const q = query(collection(db, "app_logs"), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-      appLogsTable.innerHTML = '<tr><th>Action</th><th>Target Email</th><th>Performed By</th><th>Reason</th><th>Timestamp</th></tr>';
-      snapshot.forEach(d => {
-        const l = d.data();
-        const date = l.timestamp
-          ? (l.timestamp.seconds ? new Date(l.timestamp.seconds * 1000).toLocaleString() : new Date(l.timestamp).toLocaleString())
-          : '-';
-        appLogsTable.insertRow().innerHTML = `<td>${l.action}</td><td>${l.targetEmail || '-'}</td><td>${l.performedBy || '-'}</td><td>${l.reason || '-'}</td><td>${date}</td>`;
-      });
-      appLogs.style.display = 'block';
-      adminLogs.style.display = 'none';
-    });
+    clearAllBtn.addEventListener('click', ()=> { requestsBody.innerHTML = ''; showToast('Display cleared', 'info', 1200); });
 
-    // ensure logs are created for every admin action (safety retry)
-    // Note: already handled in perform(); here we just keep UI consistent.
+    // utilities
+    function escapeHtml(str){ return String(str || '').replace(/[&<>"'`]/g, (s)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;' }[s])); }
+    function truncate(s, n){ return s.length>n ? s.slice(0,n-1)+'…' : s; }
+
+    // ensure cleanup
+    window.addEventListener('beforeunload', ()=> { if(typeof unsubscribeRequests === 'function') unsubscribeRequests(); });
 
   </script>
 </body>
 </html>
-
