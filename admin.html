@@ -2,188 +2,323 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CSQUARE³ Agency — Admin Dashboard</title>
   <style>
     :root{
       --deep-purple:#231123;
       --pink:#c30f45;
-      --dark-bg:#0f0710;
+      --dark-bg:#120916;
       --card-bg: rgba(35,17,35,0.55);
       --accent: #c30f45;
-      --text: #ffffff;
-      --muted:#b9a7b6;
+      --muted: #bba6b6;
       --success: #28a745;
       --danger: #dc3545;
-      --warning: #ffc107;
+      --glass: rgba(255,255,255,0.03);
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(180deg,var(--dark-bg), #07030a 120%);
-      color:var(--text);
-      padding:24px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg,var(--dark-bg), #0b0610);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      padding:2rem;
     }
-    .wrap{max-width:1200px;margin:0 auto;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
-    .brand{display:flex;gap:12px;align-items:center;}
-    .brand img{height:48px;width:auto;filter: drop-shadow(0 0 12px rgba(195,15,69,0.25));}
-    .brand h1{font-size:1.1rem;margin:0;color:var(--text);font-weight:700;}
-    .brand small{display:block;color:var(--muted);font-weight:600;font-size:0.8rem;margin-top:2px;}
-    .controls{display:flex;gap:10px;align-items:center;}
-    .btn{background: linear-gradient(135deg,var(--deep-purple), var(--pink));color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;display:inline-flex;gap:8px;align-items:center;}
-    .btn.ghost{background: transparent;border:1px solid rgba(255,255,255,0.06);}
-    .grid{display:grid;grid-template-columns: 1fr 380px;gap:18px;align-items:start;}
-    .card{background: var(--card-bg);border:1px solid rgba(195,15,69,0.15);padding:16px;border-radius:14px;box-shadow: 0 8px 30px rgba(0,0,0,0.6);}
-    .login-box{max-width:420px;margin:6vh auto;padding:22px;border-radius:14px;border:1px solid rgba(195,15,69,0.2);text-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-    .login-box h2{color:var(--pink);margin-bottom:8px;}
-    .login-box input{width:100%;padding:10px 12px;margin:8px 0;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:#120814;color:var(--text);}
-    .stats{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px;}
-    .stat{flex:1;padding:12px;border-radius:10px;background: linear-gradient(135deg, rgba(195,15,69,0.06), rgba(195,15,69,0.03));border:1px solid rgba(195,15,69,0.06);text-align:center;}
-    .stat h3{margin:0;font-size:1.05rem;color:var(--muted);}
-    .stat p{margin:6px 0 0;font-size:1.4rem;font-weight:800;color:var(--text);}
-    .top-controls{display:flex;gap:12px;margin-bottom:12px;align-items:center;}
-    #searchInput{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:#120814;color:var(--text);}
-    .tabs{display:flex;gap:8px;padding:8px;flex-wrap:wrap;}
-    .tab{padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:700;color:var(--muted);}
-    .tab.active{background:var(--pink);color:#fff;}
-    .table-wrap{overflow:auto;margin-top:8px;}
-    table{width:100%;border-collapse:collapse;min-width:900px;}
-    th,td{padding:10px 8px;border-bottom:1px dashed rgba(255,255,255,0.02);text-align:left;font-size:0.95rem;vertical-align:middle;}
-    th{color:var(--muted);font-size:0.85rem;background:rgba(0,0,0,0.02);}
-    td.tags{max-width:260px;}
-    .tag{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(195,15,69,0.12);color:var(--pink);font-weight:700;margin:2px 4px;font-size:0.8rem;}
-    .action-btn{padding:6px 8px;border-radius:8px;border:none;cursor:pointer;margin-right:6px;font-weight:700;}
-    .action-btn.inprogress{background:linear-gradient(90deg,#8b5cf6,#06b6d4);color:#fff;}
-    .action-btn.complete{background:var(--success);color:#fff;}
-    .action-btn.delete{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);}
-    .right-col .section{margin-bottom:12px;}
-    .small{font-size:0.85rem;color:var(--muted);}
-    .small-table{width:100%;border-collapse:collapse;}
-    .small-table th,.small-table td{padding:8px;border:1px solid rgba(255,255,255,0.03);font-size:0.85rem;}
-    /* toasts top-right */
-    .toasts{position:fixed;right:20px;top:20px;display:flex;flex-direction:column;gap:8px;z-index:9999;align-items:flex-end;}
-    .toast{background:#111;border-left:4px solid var(--pink);padding:10px 12px;border-radius:8px;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.6);min-width:220px;opacity:1;transition:transform .25s,opacity .25s;}
-    .toast.success{border-left-color:var(--success);}
-    .toast.warn{border-left-color:var(--warning);}
-    .toast.hide{opacity:0;transform:translateY(-8px);}
-    @media (max-width:980px){.grid{grid-template-columns: 1fr;}table{min-width:720px;} .wrap{padding:12px;}}
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* Header */
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1.25rem;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand img{ height:48px; filter: drop-shadow(0 0 10px var(--pink)); }
+    .brand h1{ font-size:1.1rem; margin:0; color:var(--pink); }
+    .controls{ display:flex; gap:8px; align-items:center; }
+
+    /* Login box */
+    .login-box{
+      max-width:420px;
+      margin:6vh auto;
+      background:var(--card-bg);
+      border:1px solid rgba(195,15,69,0.28);
+      padding:2rem;
+      border-radius:14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      text-align:center;
+    }
+    .login-box h2{ margin:0 0 0.6rem 0; color:var(--pink); }
+    .login-box input{
+      width:100%;
+      padding:0.9rem;
+      margin:0.6rem 0;
+      border-radius:10px;
+      border:2px solid rgba(195,15,69,0.18);
+      background:#1a0f17;
+      color:#fff;
+      font-size:0.95rem;
+    }
+    .login-box button{
+      margin-top:0.6rem;
+      padding:0.85rem 1.4rem;
+      border-radius:40px;
+      border:none;
+      background:linear-gradient(135deg,var(--deep-purple),var(--pink));
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+    }
+    #errorMsg{ color:#ff6b6b; margin-top:0.6rem; min-height:1.2rem }
+
+    /* Dashboard (hidden until login) */
+    .dashboard{
+      display:none;
+      background: transparent;
+    }
+    .panel{
+      background: var(--card-bg);
+      border-radius:12px;
+      padding:1rem;
+      border:1px solid rgba(195,15,69,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .top-row{
+      display:flex;
+      gap:12px;
+      margin-bottom:12px;
+      align-items:center;
+    }
+
+    .stat{
+      flex:1;
+      padding:1rem;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(195,15,69,0.06);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .stat strong{ font-size:1.4rem; color:var(--pink) }
+
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn{
+      padding:0.6rem 0.9rem;
+      border-radius:10px;
+      border:1px solid rgba(195,15,69,0.12);
+      background:transparent;
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn.primary{ background:linear-gradient(135deg,var(--deep-purple),var(--pink)); box-shadow:0 6px 20px rgba(195,15,69,0.12); }
+    .btn.ghost{ background:transparent; }
+    .btn.warn{ background: linear-gradient(90deg,#ffb84d,#ffc107); color:#000; }
+    .btn.danger{ background: linear-gradient(90deg,#ff6b6b,#dc3545); color:#fff; }
+
+    /* search & tabs */
+    .toolbar{
+      display:flex;
+      gap:12px;
+      margin:12px 0;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    #searchInput{
+      flex:1;
+      padding:0.7rem 1rem;
+      border-radius:10px;
+      border:1px solid rgba(195,15,69,0.1);
+      background:#120712;
+      color:#fff;
+      min-width:220px;
+    }
+    .tabs{ display:flex; gap:8px; }
+    .tab{ padding:0.45rem 0.7rem; border-radius:8px; cursor:pointer; border:1px solid rgba(195,15,69,0.08); background:transparent; font-weight:600; }
+    .tab.active{ background:var(--pink); color:#fff; box-shadow:0 8px 20px rgba(195,15,69,0.12); }
+
+    /* table */
+    .table-wrap{ margin-top:12px; overflow:auto; border-radius:10px; border:1px solid rgba(255,255,255,0.03); }
+    table{ width:100%; border-collapse:collapse; min-width:980px; }
+    th, td{ padding:0.75rem 0.8rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); font-size:0.95rem; color:#fff; }
+    th{ position:sticky; top:0; background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1)); color:var(--muted); font-weight:700; z-index:2; }
+    tr:hover td{ background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); }
+
+    .tag{ display:inline-block; padding:4px 8px; border-radius:8px; background:rgba(255,255,255,0.03); border:1px solid rgba(195,15,69,0.08); margin-right:6px; font-size:0.85rem; color:var(--pink) }
+
+    .row-actions button{ margin-right:6px; }
+
+    /* logs area */
+    .logs{ margin-top:12px; display:flex; gap:12px; flex-direction:column; }
+    .logs .panel{ padding:0.75rem; max-height:260px; overflow:auto; }
+
+    /* toast */
+    .toast-wrap{ position:fixed; right:18px; bottom:18px; z-index:9999; display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+    .toast{ background:#111; padding:12px 14px; border-radius:10px; border:1px solid rgba(195,15,69,0.12); box-shadow:0 6px 20px rgba(0,0,0,0.6); color:#fff; font-weight:600; min-width:200px; }
+    .toast.success{ border-left:6px solid var(--success); }
+    .toast.error{ border-left:6px solid var(--danger); }
+    .toast.info{ border-left:6px solid var(--pink); }
+
+    /* small screens */
+    @media(max-width:900px){
+      .stat{ flex-direction:column; align-items:flex-start; gap:6px; }
+      .table-wrap{ overflow:auto; }
+      table{ min-width:800px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
       <div class="brand">
         <img src="images/logo1.png" alt="logo">
         <div>
           <h1>CSQUARE³ Agency — Admin</h1>
-          <small>Dashboard • Service Requests</small>
+          <div style="font-size:0.85rem; color:var(--muted)">Single Page Dashboard</div>
         </div>
       </div>
 
       <div class="controls">
-        <button class="btn ghost" id="refreshBtn">🔄 Refresh</button>
-        <button class="btn" id="downloadBtn">⬇️ Export CSV</button>
-        <button class="btn ghost" id="audioToggle">🔔 Audio: ON</button>
-        <button class="btn ghost" id="logoutBtn" style="display:none">Logout</button>
+        <button class="btn" id="refreshBtn" title="Refresh data">🔄 Refresh</button>
+        <button class="btn" id="exportBtn" title="Download CSV">⬇️ Export CSV</button>
+        <button class="btn" id="logoutBtnTop" style="display:none">Logout</button>
       </div>
-    </header>
+    </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="stats">
-          <div class="stat"><h3>Service Requests</h3><p id="count">0</p></div>
-          <div class="stat"><h3>Visitors</h3><p id="visitsCount">0</p></div>
-          <div class="stat"><h3>Pending</h3><p id="pendingCount">0</p></div>
-        </div>
+    <!-- LOGIN BOX -->
+    <div class="login-box panel" id="loginBox">
+      <h2>Admin Login</h2>
+      <input id="adminEmail" type="email" placeholder="Email" />
+      <input id="adminPassword" type="password" placeholder="Password" />
+      <div style="display:flex; gap:8px; justify-content:center; align-items:center; margin-top:8px;">
+        <button id="loginBtn" class="btn primary">Login</button>
+        <button id="demoBtn" class="btn ghost" title="Fill demo">Demo</button>
+      </div>
+      <p id="errorMsg"></p>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:8px;">Super Admin has extra controls (logs & app logs).</div>
+    </div>
 
-        <div class="top-controls">
-          <input id="searchInput" placeholder="🔍 Search by client, email or service..." />
-          <div class="tabs" id="tabs">
-            <div class="tab active" data-status="all">All</div>
-            <div class="tab" data-status="pending">Pending</div>
-            <div class="tab" data-status="in_progress">In Progress</div>
-            <div class="tab" data-status="completed">Completed</div>
-            <div class="tab" data-status="graphic design">Graphic</div>
-            <div class="tab" data-status="programming">Programming</div>
-            <div class="tab" data-status="video editing">Video</div>
-            <div class="tab" data-status="photography">Photo</div>
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard">
+
+      <div class="top-row">
+        <div class="stat panel">
+          <div>
+            <div style="font-size:0.9rem; color:var(--muted)">Service Requests</div>
+            <strong id="count">0</strong>
+            <div style="font-size:0.85rem; color:var(--muted)">Total requests</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.85rem; color:var(--muted)">Visits</div>
+            <strong id="visitsCount">0</strong>
           </div>
         </div>
 
-        <div class="table-wrap">
-          <table id="requestsTable">
-            <thead>
-              <tr>
-                <th>Client Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Service Tags</th>
-                <th>Project Description</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="requestsBody"></tbody>
-          </table>
+        <div style="flex:1" class="panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+            <div style="font-weight:700; color:var(--muted)">Quick Actions</div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn" id="selectAllBtn">Select All</button>
+              <button class="btn" id="markInProgressBulk">In Progress</button>
+              <button class="btn" id="markCompleteBulk">Complete</button>
+              <button class="btn danger" id="deleteBulkBtn">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="right-col">
-        <div class="card section">
-          <h3 style="margin-top:0">Quick Tools</h3>
-          <p class="small">Use controls below for admin operations.</p>
-          <div style="margin-top:10px" class="flex">
-            <button class="btn" id="newRequestSeed">➕ Seed Test Request</button>
-            <button class="btn ghost" id="clearAllBtn">🧹 Clear Display</button>
-          </div>
+      <!-- toolbar -->
+      <div class="toolbar">
+        <input id="searchInput" placeholder="🔍 Search by client name, email, or service..." />
+        <div class="tabs" id="tabs">
+          <div class="tab active" data-status="all">All</div>
+          <div class="tab" data-status="pending">Pending</div>
+          <div class="tab" data-status="in progress">In Progress</div>
+          <div class="tab" data-status="completed">Completed</div>
         </div>
 
-        <div class="card section">
-          <h3 style="margin-top:0">Admin Logs</h3>
-          <p class="small">Recent admin login activity</p>
-          <div style="margin-top:10px;max-height:200px;overflow:auto;">
-            <table class="small-table" id="adminLogsTable"><thead><tr><th>Email</th><th>IP</th><th>When</th></tr></thead><tbody></tbody></table>
+        <div style="margin-left:auto; display:flex; gap:8px;">
+          <button class="btn" id="newRequestsToggle">🔔 New Alerts</button>
+          <button class="btn ghost" id="showLogsBtn" style="display:none">📜 Logs</button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrap panel" id="tablePanel">
+        <table id="reqTable" aria-live="polite">
+          <thead>
+            <tr>
+              <th style="width:40px"><input type="checkbox" id="masterCheckbox" /></th>
+              <th>Client Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Service Tags</th>
+              <th>Project Description</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reqTbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Logs & small panels -->
+      <div class="logs">
+        <div class="panel" id="logsPanel" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:700; color:var(--muted)">Admin Logs</div>
+            <button class="btn ghost" id="closeLogsBtn">Close</button>
           </div>
-          <div style="margin-top:8px;font-size:0.85rem;color:var(--muted)">Only SUPER admin sees detailed logs.</div>
+          <div id="logsList" style="margin-top:8px; max-height:260px; overflow:auto;"></div>
         </div>
 
-        <div class="card section">
-          <h3 style="margin-top:0">Application Logs</h3>
-          <p class="small">Action history (delete/status updates)</p>
-          <div style="margin-top:10px;max-height:200px;overflow:auto;">
-            <table class="small-table" id="appLogsTable"><thead><tr><th>Action</th><th>Target</th><th>By</th><th>When</th></tr></thead><tbody></tbody></table>
+        <div class="panel" id="appLogsPanel" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:700; color:var(--muted)">Application Logs</div>
+            <button class="btn ghost" id="closeAppLogsBtn">Close</button>
           </div>
+          <div id="appLogsList" style="margin-top:8px; max-height:260px; overflow:auto;"></div>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- login modal -->
-  <div id="loginModal" class="login-box" style="display:block;">
-    <h2>Admin Login</h2>
-    <input id="adminEmail" type="email" placeholder="admin email" />
-    <input id="adminPassword" type="password" placeholder="password" />
-    <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
-      <button class="btn" id="loginBtn">Login</button>
-    </div>
-    <p class="note">You need an admin account (Firebase Auth) to access.</p>
-    <p id="loginError" style="color:#ff6b6b"></p>
-  </div>
-
-  <!-- toasts -->
-  <div class="toasts" id="toasts"></div>
+  <!-- Toast container -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
   <script type="module">
+    // Firebase imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
     import {
-      getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot,
-      doc, updateDoc, deleteDoc, limit
+      getFirestore, collection, getDocs, addDoc, doc, deleteDoc, updateDoc,
+      onSnapshot, query, orderBy, where, getDoc
     } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
-    // Firebase config (unchanged)
+    // ---------- CONFIG ----------
     const firebaseConfig = {
       apiKey: "AIzaSyALCOPIyEyT3DNh0jOIIqRXQ-KTUolJh7k",
       authDomain: "csquare3-club.firebaseapp.com",
@@ -198,393 +333,473 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    // Super admin same as old
-    const SUPER_ADMIN = "admin@csquare3.club";
+    // ---------- CONSTANTS ----------
+    const SERVICE_COLLECTION = "serviceRequests"; // <--- إذا تريد تغييره اعدل هنا
+    const ADMIN_LOGS_COLLECTION = "admin_logs";
+    const APP_LOGS_COLLECTION = "app_logs";
+    const VISITS_COLLECTION = "visits";
+    const SUPER_ADMIN = "admin@csquare3.club"; // super admin email
 
-    // DOM
-    const loginModal = document.getElementById('loginModal');
+    // ---------- UI ELEMENTS ----------
+    const loginBox = document.getElementById('loginBox');
+    const dashboard = document.getElementById('dashboard');
     const loginBtn = document.getElementById('loginBtn');
-    const adminEmailInput = document.getElementById('adminEmail');
-    const adminPasswordInput = document.getElementById('adminPassword');
-    const loginError = document.getElementById('loginError');
+    const demoBtn = document.getElementById('demoBtn');
+    const logoutBtnTop = document.getElementById('logoutBtnTop');
+    const errorMsg = document.getElementById('errorMsg');
+
+    const countEl = document.getElementById('count');
+    const visitsEl = document.getElementById('visitsCount');
+    const reqTbody = document.getElementById('reqTbody');
+
+    const searchInput = document.getElementById('searchInput');
+    const tabs = document.querySelectorAll('.tab');
 
     const refreshBtn = document.getElementById('refreshBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const audioToggle = document.getElementById('audioToggle');
-    const logoutBtn = document.getElementById('logoutBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const masterCheckbox = document.getElementById('masterCheckbox');
+    const selectAllBtn = document.getElementById('selectAllBtn');
+    const markInProgressBulk = document.getElementById('markInProgressBulk');
+    const markCompleteBulk = document.getElementById('markCompleteBulk');
+    const deleteBulkBtn = document.getElementById('deleteBulkBtn');
 
-    const requestsBody = document.getElementById('requestsBody');
-    const countEl = document.getElementById('count');
-    const visitsCountEl = document.getElementById('visitsCount');
-    const pendingCountEl = document.getElementById('pendingCount');
+    const newRequestsToggle = document.getElementById('newRequestsToggle');
+    const showLogsBtn = document.getElementById('showLogsBtn');
+    const logsPanel = document.getElementById('logsPanel');
+    const logsList = document.getElementById('logsList');
+    const closeLogsBtn = document.getElementById('closeLogsBtn');
 
-    const tabButtons = document.querySelectorAll('.tab');
-    const searchInput = document.getElementById('searchInput');
-    const adminLogsTable = document.getElementById('adminLogsTable').querySelector('tbody');
-    const appLogsTable = document.getElementById('appLogsTable').querySelector('tbody');
+    const appLogsPanel = document.getElementById('appLogsPanel');
+    const appLogsList = document.getElementById('appLogsList');
+    const closeAppLogsBtn = document.getElementById('closeAppLogsBtn');
 
-    const newRequestSeed = document.getElementById('newRequestSeed');
-    const clearAllBtn = document.getElementById('clearAllBtn');
-    const toasts = document.getElementById('toasts');
+    const logoutTop = document.getElementById('logoutBtnTop');
 
-    // helpers
-    function showToast(message, type='info', timeout=3500){
-      const div = document.createElement('div');
-      div.className = 'toast ' + (type==='success'?'success': type==='warn'?'warn':'');
-      div.textContent = message;
-      toasts.prepend(div);
-      setTimeout(()=> { div.classList.add('hide'); setTimeout(()=>div.remove(),300); }, timeout);
-    }
+    const toastWrap = document.getElementById('toastWrap');
 
-    let audioEnabled = true;
-    audioToggle.addEventListener('click', () => {
-      audioEnabled = !audioEnabled;
-      audioToggle.textContent = audioEnabled ? '🔔 Audio: ON' : '🔕 Audio: OFF';
-      showToast('Audio ' + (audioEnabled ? 'enabled' : 'disabled'), 'info', 1500);
-    });
-    function playBeep(type='short'){
-      if(!audioEnabled) return;
+    // state
+    let requests = []; // local cache
+    let knownIds = new Set();
+    let currentFilter = 'all';
+    let currentUser = null;
+    let isSuper = false;
+    let alertsEnabled = true;
+
+    // small beep using WebAudio
+    function playBeep() {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const o = ctx.createOscillator();
         const g = ctx.createGain();
         o.type = 'sine';
-        o.frequency.value = (type==='short') ? 880 : 660;
+        o.frequency.value = 880;
         g.gain.value = 0.05;
         o.connect(g);
         g.connect(ctx.destination);
         o.start();
-        setTimeout(()=> { o.stop(); ctx.close(); }, (type==='short')?120:360);
-      } catch(e){}
+        setTimeout(()=>{ o.stop(); ctx.close(); }, 180);
+      } catch(e){ /* ignore */ }
     }
 
-    // state
-    let serviceRequests = [];
-    let seenIds = new Set();
-    let unsubscribeRequests = null;
-    let currentFilter = 'all';
-
-    // utilities
-    function escapeHtml(str){ return String(str || '').replace(/[&<>"'`]/g, (s)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;' }[s])); }
-    function truncate(s, n){ return s.length>n ? s.slice(0,n-1)+'…' : s; }
-
-    // normalize status helper
-    function normalizeStatus(raw){
-      if(!raw) return 'pending';
-      return String(raw).toLowerCase().trim().replace(/\s+/g, '_');
+    // toast helper
+    function toast(message, type='info', timeout=3500) {
+      const t = document.createElement('div');
+      t.className = 'toast ' + (type || 'info');
+      t.textContent = message;
+      toastWrap.appendChild(t);
+      setTimeout(()=>{ t.style.opacity = '1'; }, 50);
+      setTimeout(()=>{ t.style.opacity = '0'; t.addEventListener('transitionend', ()=> t.remove()); }, timeout);
     }
 
-    // initial mark seen so initial load doesn't beep
-    (async function initialMarkSeen(){
-      try{
-        const q = query(collection(db, "serviceRequests"), orderBy("timestamp","desc"), limit(200));
-        const snap = await getDocs(q);
-        snap.forEach(d => seenIds.add(d.id));
-      }catch(e){}
-    })();
+    // ---------- AUTH ----------
+    demoBtn.addEventListener('click', () => {
+      document.getElementById('adminEmail').value = "admin@csquare3.club";
+      document.getElementById('adminPassword').value = "password123";
+    });
 
-    // LOGIN: only login button triggers dashboard activation
     loginBtn.addEventListener('click', async () => {
-      loginError.textContent = '';
-      const email = adminEmailInput.value.trim();
-      const password = adminPasswordInput.value.trim();
-      if(!email || !password){ loginError.textContent = 'Enter email and password'; return; }
-      try{
-        const cred = await signInWithEmailAndPassword(auth, email, password);
-        // log admin login
-        try{
-          const ip = await fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(j=>j.ip).catch(()=> 'N/A');
-          await addDoc(collection(db, 'admin_logs'), { email: cred.user.email, ip, timestamp: new Date(), userAgent: navigator.userAgent });
-        }catch(e){}
-        // show dashboard (only after explicit login)
-        loginModal.style.display = 'none';
-        document.getElementById('logoutBtn').style.display = 'inline-flex';
-        showToast('Logged in as ' + cred.user.email, 'success', 2200);
-
-        // if super admin -> load logs
-        if(cred.user.email === SUPER_ADMIN){
-          loadAdminLogs();
-          loadAppLogs();
-        }
-
-        // start realtime
-        setupRealtimeListener();
-        loadVisitsCount();
-      }catch(err){
-        console.error(err);
-        loginError.textContent = 'Invalid credentials or network error';
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value.trim();
+      if(!email || !password){ errorMsg.textContent = 'Enter credentials.'; return; }
+      try {
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        errorMsg.textContent = '';
+        // add admin log
+        let ip = 'Unknown';
+        try { const r = await fetch('https://api.ipify.org?format=json'); const j = await r.json(); ip = j.ip || ip; } catch(e){}
+        await addDoc(collection(db, ADMIN_LOGS_COLLECTION), { email: userCred.user.email, ip, timestamp: new Date(), userAgent: navigator.userAgent });
+      } catch(e) {
+        errorMsg.textContent = 'Invalid credentials ❌';
       }
     });
 
-    // sign out
-    logoutBtn.addEventListener('click', async ()=>{
+    logoutTop.addEventListener('click', async () => {
       await signOut(auth);
-      loginModal.style.display = 'block'; // show login again
-      document.getElementById('logoutBtn').style.display = 'none';
-      showToast('Logged out', 'info', 1800);
-      if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
-      serviceRequests = [];
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+      if(user) {
+        isSuper = (user.email === SUPER_ADMIN);
+        loginBox.style.display = 'none';
+        dashboard.style.display = 'block';
+        logoutTop.style.display = 'inline-block';
+        showLogsBtn.style.display = isSuper ? 'inline-block' : 'none';
+        // initial load and setup real-time listener
+        await loadVisits();
+        await initialLoadAndListen();
+        toast('Welcome back, ' + (user.email || 'admin') + ' ✅', 'success', 2400);
+      } else {
+        loginBox.style.display = 'block';
+        dashboard.style.display = 'none';
+        logoutTop.style.display = 'none';
+      }
+    });
+
+    // ---------- DATA LOADING ----------
+    // initial one-time load + set up real-time onSnapshot
+    async function initialLoadAndListen() {
+      // fetch once
+      await fetchAllRequests();
+
+      // set up real-time listener for collection changes
+      const q = query(collection(db, SERVICE_COLLECTION), orderBy('timestamp','desc'));
+      onSnapshot(q, (snapshot) => {
+        let changed = false;
+        snapshot.docChanges().forEach(ch => {
+          const docId = ch.doc.id;
+          const d = ch.doc.data();
+          d.docId = docId;
+          // convert timestamp to Date if needed
+          if(d.timestamp && d.timestamp.seconds) d._createdAt = new Date(d.timestamp.seconds*1000);
+          else d._createdAt = d.timestamp ? new Date(d.timestamp) : new Date();
+
+          if(ch.type === 'added') {
+            // new doc - if unseen, notify
+            if(!knownIds.has(docId)) {
+              knownIds.add(docId);
+              requests.unshift(d);
+              toast('New Request: ' + (d.clientName || '—'), 'info', 5000);
+              if(alertsEnabled) playBeep();
+              changed = true;
+            }
+          } else if(ch.type === 'modified') {
+            // update local
+            const idx = requests.findIndex(r => r.docId === docId);
+            if(idx > -1) { requests[idx] = {...requests[idx], ...d}; changed = true; }
+          } else if(ch.type === 'removed') {
+            requests = requests.filter(r => r.docId !== docId); knownIds.delete(docId); changed = true;
+          }
+        });
+        if(changed) renderTable();
+        // update counts
+        countEl.textContent = requests.length;
+      }, (err) => {
+        console.error('Realtime error', err);
+        toast('Realtime listener error', 'error', 3500);
+      });
+    }
+
+    // one-time fetch (populate knownIds)
+    async function fetchAllRequests() {
+      const snapshot = await getDocs(query(collection(db, SERVICE_COLLECTION), orderBy('timestamp','desc')));
+      requests = [];
+      knownIds = new Set();
+      snapshot.forEach(s => {
+        const d = s.data();
+        d.docId = s.id;
+        if(d.timestamp && d.timestamp.seconds) d._createdAt = new Date(d.timestamp.seconds*1000);
+        else d._createdAt = d.timestamp ? new Date(d.timestamp) : new Date();
+        requests.push(d);
+        knownIds.add(s.id);
+      });
+      countEl.textContent = requests.length;
       renderTable();
-    });
-
-    // Important: DO NOT auto-show dashboard on auth state change.
-    // We keep onAuthStateChanged to maintain session awareness but NOT auto-activate UI.
-    onAuthStateChanged(auth, (user) => {
-      // if user signs out elsewhere, ensure UI resets
-      if(!user){
-        loginModal.style.display = 'block';
-        document.getElementById('logoutBtn').style.display = 'none';
-        if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
-        serviceRequests = [];
-        renderTable();
-      }
-      // if user is signed in from previous session, we still wait for explicit login action per your request
-    });
-
-    // realtime listener setup (normalize statuses)
-    function setupRealtimeListener(){
-      if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
-      const q = query(collection(db, "serviceRequests"), orderBy("timestamp","desc"));
-      unsubscribeRequests = onSnapshot(q, (snap) => {
-        const docs = [];
-        let newDetected = false;
-        let statusChangedCount = 0;
-        const prevStatus = new Map(serviceRequests.map(r=>[r.id, r.status]));
-        snap.forEach(docSnap => {
-          const d = docSnap.data();
-          d.id = docSnap.id;
-          // normalize status
-          d.status = normalizeStatus(d.status);
-          docs.push(d);
-          if(!seenIds.has(d.id)){
-            seenIds.add(d.id);
-            newDetected = true;
-          }
-        });
-
-        // detect status changes
-        docs.forEach(d => {
-          const before = prevStatus.get(d.id);
-          if(before && before !== d.status) statusChangedCount++;
-        });
-
-        serviceRequests = docs;
-        renderTable();
-
-        if(newDetected){
-          showToast('New service request received ✅', 'success', 3500);
-          playBeep('short');
-        }
-        if(statusChangedCount > 0){
-          showToast('Some request statuses changed ⚙️', 'info', 3000);
-          playBeep('long');
-        }
-        updateStats();
-      }, (err)=> {
-        console.error('Listener error', err);
-        showToast('Realtime listener failed', 'warn', 3000);
-      });
     }
 
-    // render table
-    function renderTable(){
-      const qVal = (searchInput.value || '').toLowerCase().trim();
-      const filtered = serviceRequests.filter(r=>{
-        // top-level filter by tab status or tag
-        if(currentFilter !== 'all'){
-          const tagsLower = (r.serviceTags || []).map(t=>t.toLowerCase());
-          // tag filters (graphic design, programming, video editing, photography)
-          if(['graphic design','programming','video editing','photography'].includes(currentFilter)){
-            // check if any tag contains the keyword (loose match)
-            const keyword = currentFilter.split(' ')[0]; // 'graphic','programming','video'...
-            if(!tagsLower.some(t => t.includes(keyword))) return false;
-          } else {
-            if((r.status || 'pending') !== currentFilter) return false;
-          }
-        }
-        if(!qVal) return true;
-        return (r.clientName && r.clientName.toLowerCase().includes(qVal))
-               || (r.email && r.email.toLowerCase().includes(qVal))
-               || (r.serviceTags && r.serviceTags.join(', ').toLowerCase().includes(qVal))
-               || (r.projectDescription && r.projectDescription.toLowerCase().includes(qVal));
+    async function loadVisits() {
+      try {
+        const vs = await getDocs(collection(db, VISITS_COLLECTION));
+        visitsEl.textContent = vs.size;
+      } catch(e) { visitsEl.textContent = '0'; }
+    }
+
+
+    // ---------- RENDERING ----------
+    function renderTable() {
+      const q = searchInput.value.trim().toLowerCase();
+      const filtered = requests.filter(r => {
+        const stat = (r.status || 'pending').toLowerCase();
+        if(currentFilter !== 'all' && stat !== currentFilter) return false;
+        if(!q) return true;
+        const hay = `${r.clientName || ''} ${r.email || ''} ${(r.serviceTags||[]).join(' ')} ${r.projectDescription||''}`.toLowerCase();
+        return hay.includes(q);
       });
 
-      const tbody = requestsBody;
-      tbody.innerHTML = '';
-      filtered.forEach(r=>{
+      // table body
+      reqTbody.innerHTML = '';
+      filtered.forEach(r => {
         const tr = document.createElement('tr');
-        const tagsHtml = (r.serviceTags || []).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join(' ');
-        tr.innerHTML = `
-          <td>${escapeHtml(r.clientName || '-')}</td>
-          <td>${escapeHtml(r.email || '-')}</td>
-          <td>${escapeHtml(r.phone || '-')}</td>
-          <td class="tags">${tagsHtml}</td>
-          <td style="max-width:260px">${escapeHtml(truncate(r.projectDescription || '-', 200))}</td>
-          <td style="font-weight:800;text-transform:capitalize">${statusBadge(r.status || 'pending')}</td>
-          <td>
-            <button class="action-btn inprogress" data-id="${r.id}" data-action="in_progress" title="Mark In Progress">▶️</button>
-            <button class="action-btn complete" data-id="${r.id}" data-action="completed" title="Mark Completed">✔️</button>
-            <button class="action-btn delete" data-id="${r.id}" data-action="deleted" title="Delete">🗑️</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
 
-      // update counts
-      countEl.textContent = serviceRequests.length;
-      pendingCountEl.textContent = serviceRequests.filter(s=> (s.status||'pending') === 'pending').length;
+        // checkbox
+        const chTd = document.createElement('td');
+        chTd.style.width = '40px';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'row-checkbox';
+        cb.dataset.id = r.docId;
+        chTd.appendChild(cb);
+        tr.appendChild(chTd);
+
+        // client name
+        const nameTd = document.createElement('td'); nameTd.textContent = r.clientName || '-'; tr.appendChild(nameTd);
+        const emailTd = document.createElement('td'); emailTd.textContent = r.email || '-'; tr.appendChild(emailTd);
+        const phoneTd = document.createElement('td'); phoneTd.textContent = r.phone || '-'; tr.appendChild(phoneTd);
+
+        // service tags
+        const tagsTd = document.createElement('td');
+        (r.serviceTags||[]).forEach(t => {
+          const span = document.createElement('span'); span.className = 'tag'; span.textContent = t; tagsTd.appendChild(span);
+        });
+        tr.appendChild(tagsTd);
+
+        const projTd = document.createElement('td'); projTd.textContent = r.projectDescription ? (r.projectDescription.length>120 ? r.projectDescription.slice(0,117)+'...' : r.projectDescription) : '-'; tr.appendChild(projTd);
+
+        const statusTd = document.createElement('td');
+        const st = (r.status || 'pending');
+        statusTd.innerHTML = `<strong style="color:${st==='pending'? 'var(--muted)': st==='in progress' ? '#ffc107' : st==='completed' ? 'var(--success)' : 'var(--danger)'}; text-transform:capitalize">${st}</strong>`;
+        tr.appendChild(statusTd);
+
+        const dateTd = document.createElement('td');
+        const dts = r._createdAt ? r._createdAt.toLocaleString() : '-';
+        dateTd.textContent = dts;
+        tr.appendChild(dateTd);
+
+        // actions
+        const actionsTd = document.createElement('td');
+        actionsTd.className = 'row-actions';
+
+        const inProgressBtn = document.createElement('button');
+        inProgressBtn.className = 'btn';
+        inProgressBtn.textContent = '➡️ In Progress';
+        inProgressBtn.addEventListener('click', () => changeStatus(r.docId, 'in progress'));
+
+        const completeBtn = document.createElement('button');
+        completeBtn.className = 'btn';
+        completeBtn.textContent = '✔️ Complete';
+        completeBtn.addEventListener('click', () => changeStatus(r.docId, 'completed'));
+
+        const rejectBtn = document.createElement('button');
+        rejectBtn.className = 'btn danger';
+        rejectBtn.textContent = '❌ Reject';
+        rejectBtn.addEventListener('click', () => changeStatus(r.docId, 'rejected'));
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn';
+        delBtn.textContent = '🗑️ Delete';
+        delBtn.addEventListener('click', () => deleteWithReason(r.docId, r.email));
+
+        actionsTd.appendChild(inProgressBtn);
+        actionsTd.appendChild(completeBtn);
+        actionsTd.appendChild(rejectBtn);
+        actionsTd.appendChild(delBtn);
+
+        tr.appendChild(actionsTd);
+
+        reqTbody.appendChild(tr);
+      });
     }
 
-    // event delegation for actions (works after every render)
-    requestsBody.addEventListener('click', async (e) => {
-      const btn = e.target.closest('button[data-id]');
-      if(!btn) return;
-      const id = btn.dataset.id;
-      const action = btn.dataset.action;
-      const req = serviceRequests.find(r=>r.id === id);
-      if(!req){ showToast('Request not found', 'warn'); return; }
-
-      if(action === 'deleted'){
-        const reason = prompt('Reason for deletion (required):');
-        if(!reason || !reason.trim()){ alert('Deletion cancelled — reason is required.'); return; }
-        try{
-          await deleteDoc(doc(db, 'serviceRequests', id));
-          await addDoc(collection(db, 'app_logs'), { action: 'deleted', targetEmail: req.email || null, performedBy: auth.currentUser ? auth.currentUser.email : 'unknown', reason: reason.trim(), timestamp: new Date() });
-          showToast('Request deleted', 'warn', 2500);
-        }catch(e){ console.error(e); showToast('Delete failed', 'warn', 2000); }
-        return;
+    // ---------- ACTIONS ----------
+    async function changeStatus(docId, newStatus) {
+      try {
+        await updateDoc(doc(db, SERVICE_COLLECTION, docId), { status: newStatus });
+        await addDoc(collection(db, APP_LOGS_COLLECTION), { action: `status:${newStatus}`, targetEmail: '-', performedBy: currentUser ? currentUser.email : 'unknown', reason: '', timestamp: new Date() });
+        toast('Status updated to ' + newStatus, 'success', 2500);
+        playBeep();
+        // local update (optimistic)
+        const idx = requests.findIndex(r => r.docId === docId);
+        if(idx > -1) requests[idx].status = newStatus;
+        renderTable();
+      } catch(e) {
+        console.error(e);
+        toast('Update failed', 'error', 3000);
       }
+    }
 
-      // status updates (in_progress / completed)
-      try{
-        await updateDoc(doc(db, 'serviceRequests', id), { status: action });
-        await addDoc(collection(db, 'app_logs'), { action: 'status_update', targetEmail: req.email || null, performedBy: auth.currentUser ? auth.currentUser.email : 'unknown', reason: `status set to ${action}`, timestamp: new Date() });
-        showToast('Status updated', 'success', 1800);
-      }catch(e){ console.error(e); showToast('Update failed', 'warn', 2200); }
+    async function deleteWithReason(docId, targetEmail) {
+      const reason = prompt('Reason for deletion:');
+      if(!reason || !reason.trim()){ toast('Deletion cancelled — reason required', 'error', 2200); return; }
+      try {
+        await deleteDoc(doc(db, SERVICE_COLLECTION, docId));
+        await addDoc(collection(db, APP_LOGS_COLLECTION), { action: 'deleted', targetEmail: targetEmail || '-', performedBy: currentUser ? currentUser.email : 'unknown', reason, timestamp: new Date() });
+        toast('Request deleted', 'success', 2200);
+      } catch(e) {
+        console.error(e);
+        toast('Delete failed', 'error', 2200);
+      }
+    }
+
+    // bulk actions
+    function getSelectedIds(){
+      return Array.from(document.querySelectorAll('.row-checkbox:checked')).map(i => i.dataset.id);
+    }
+
+    selectAllBtn.addEventListener('click', () => {
+      const boxes = document.querySelectorAll('.row-checkbox');
+      const anyUnchecked = Array.from(boxes).some(b => !b.checked);
+      boxes.forEach(b => b.checked = anyUnchecked);
     });
 
-    // status badge
-    function statusBadge(s){
-      const map = {
-        pending: `<span style="color:${getComputedStyle(document.documentElement).getPropertyValue('--muted')};">Pending</span>`,
-        in_progress: `<span style="color:#06b6d4;font-weight:800">In Progress</span>`,
-        completed: `<span style="color:${getComputedStyle(document.documentElement).getPropertyValue('--success')}; font-weight:800">Completed</span>`
-      };
-      return map[s] || `<span style="color:var(--muted)">${escapeHtml(s || '')}</span>`;
-    }
+    markInProgressBulk.addEventListener('click', async () => {
+      const ids = getSelectedIds();
+      if(!ids.length){ toast('No rows selected', 'error'); return; }
+      if(!confirm(`Mark ${ids.length} requests as In Progress?`)) return;
+      for(const id of ids){
+        try{ await updateDoc(doc(db, SERVICE_COLLECTION, id), { status: 'in progress' });
+              await addDoc(collection(db, APP_LOGS_COLLECTION), { action:'status:in progress', targetEmail:'-', performedBy:currentUser?currentUser.email:'unknown', reason:'bulk', timestamp:new Date() });
+        } catch(e){ console.error(e); }
+      }
+      toast('Bulk updated', 'success', 1800);
+    });
+
+    markCompleteBulk.addEventListener('click', async () => {
+      const ids = getSelectedIds();
+      if(!ids.length){ toast('No rows selected', 'error'); return; }
+      if(!confirm(`Mark ${ids.length} requests as Completed?`)) return;
+      for(const id of ids){
+        try{ await updateDoc(doc(db, SERVICE_COLLECTION, id), { status: 'completed' });
+              await addDoc(collection(db, APP_LOGS_COLLECTION), { action:'status:completed', targetEmail:'-', performedBy:currentUser?currentUser.email:'unknown', reason:'bulk', timestamp:new Date() });
+        } catch(e){ console.error(e); }
+      }
+      toast('Bulk completed', 'success', 1800);
+    });
+
+    deleteBulkBtn.addEventListener('click', async () => {
+      const ids = getSelectedIds();
+      if(!ids.length){ toast('No rows selected', 'error'); return; }
+      const reason = prompt(`Reason for deleting ${ids.length} requests:`);
+      if(!reason) { toast('Bulk delete cancelled', 'error'); return; }
+      if(!confirm(`Delete ${ids.length} requests? This is permanent.`)) return;
+      for(const id of ids){
+        try{ await deleteDoc(doc(db, SERVICE_COLLECTION, id));
+              await addDoc(collection(db, APP_LOGS_COLLECTION), { action:'deleted', targetEmail:'-', performedBy:currentUser?currentUser.email:'unknown', reason, timestamp:new Date() });
+        } catch(e){ console.error(e); }
+      }
+      toast('Bulk delete done', 'success', 2000);
+    });
+
+    // master checkbox handling
+    masterCheckbox.addEventListener('change', (e) => {
+      const checked = e.target.checked;
+      document.querySelectorAll('.row-checkbox').forEach(b => b.checked = checked);
+    });
 
     // search & tabs
-    searchInput.addEventListener('input', renderTable);
-    document.querySelectorAll('.tab').forEach(t=>{
-      t.addEventListener('click', ()=>{
-        document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');
-        currentFilter = t.dataset.status;
-        renderTable();
-      });
+    searchInput.addEventListener('input', () => renderTable());
+    tabs.forEach(t => t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      currentFilter = t.dataset.status;
+      renderTable();
+    }));
+
+    // refresh button
+    refreshBtn.addEventListener('click', async () => {
+      toast('Refreshing...', 'info', 1200);
+      await fetchAllRequests();
+      await loadVisits();
     });
 
     // export CSV
-    downloadBtn.addEventListener('click', ()=> {
-      const rows = [['Client Name','Email','Phone','Service Tags','Project Description','Status','Timestamp']];
-      serviceRequests.forEach(r=>{
+    exportBtn.addEventListener('click', () => {
+      if(!requests.length){ toast('No data to export', 'error'); return; }
+      const rows = [
+        ['Client Name','Email','Phone','Service Tags','Project Description','Status','Created At']
+      ];
+      requests.forEach(r => {
         rows.push([
           r.clientName || '',
           r.email || '',
           r.phone || '',
-          (r.serviceTags || []).join('; '),
-          (r.projectDescription || '').replace(/\n/g,' '),
-          r.status || 'pending',
-          r.timestamp ? (r.timestamp.seconds ? new Date(r.timestamp.seconds*1000).toLocaleString() : new Date(r.timestamp).toLocaleString()) : ''
+          (r.serviceTags||[]).join('; '),
+          (r.projectDescription||'').replace(/\n/g,' '),
+          r.status || '',
+          r._createdAt ? r._createdAt.toLocaleString() : ''
         ]);
       });
-      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const csv = rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'serviceRequests_export.csv';
-      document.body.appendChild(a);
+      a.download = `service_requests_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
-      a.remove();
       URL.revokeObjectURL(url);
-      showToast('CSV exported', 'success');
+      toast('CSV exported', 'success', 1400);
     });
 
-    // visits count
-    async function loadVisitsCount(){
-      try{
-        const snap = await getDocs(collection(db, 'visits'));
-        visitsCountEl.textContent = snap.size;
-      }catch(e){}
-    }
+    // logs view (super admin only)
+    showLogsBtn.addEventListener('click', async () => {
+      if(!isSuper){ toast('Admin logs require Super Admin', 'error'); return; }
+      logsPanel.style.display = 'block';
+      appLogsPanel.style.display = 'block';
+      await loadAdminLogs();
+      await loadAppLogs();
+    });
+    closeLogsBtn.addEventListener('click', () => logsPanel.style.display = 'none');
+    closeAppLogsBtn.addEventListener('click', () => appLogsPanel.style.display = 'none');
 
-    // admin logs / app logs (latest 10)
     async function loadAdminLogs(){
-      try{
-        const q = query(collection(db, 'admin_logs'), orderBy('timestamp','desc'));
-        const snap = await getDocs(q);
-        adminLogsTable.innerHTML = '';
-        let c=0;
-        snap.forEach(d=>{
-          if(c++ > 10) return;
-          const l=d.data();
-          const when = l.timestamp ? (l.timestamp.seconds ? new Date(l.timestamp.seconds*1000).toLocaleString() : new Date(l.timestamp).toLocaleString()) : '-';
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td style="font-weight:700">${escapeHtml(l.email||'-')}</td><td>${escapeHtml(l.ip||'-')}</td><td>${when}</td>`;
-          adminLogsTable.appendChild(tr);
-        });
-      }catch(e){ console.error(e); }
+      logsList.innerHTML = '<div style="color:var(--muted)">Loading admin logs...</div>';
+      const snap = await getDocs(query(collection(db, ADMIN_LOGS_COLLECTION), orderBy('timestamp','desc')));
+      logsList.innerHTML = '';
+      snap.forEach(s => {
+        const d = s.data();
+        const date = d.timestamp && d.timestamp.seconds ? new Date(d.timestamp.seconds*1000).toLocaleString() : (d.timestamp ? new Date(d.timestamp).toLocaleString() : '-');
+        const el = document.createElement('div');
+        el.style.padding = '8px';
+        el.style.borderBottom = '1px solid rgba(255,255,255,0.02)';
+        el.innerHTML = `<div style="font-weight:700">${d.email}</div><div style="color:var(--muted); font-size:0.85rem">${d.ip||'-'} • ${date}</div><div style="font-size:0.85rem; color:var(--muted)">${d.userAgent||''}</div>`;
+        logsList.appendChild(el);
+      });
     }
 
     async function loadAppLogs(){
-      try{
-        const q = query(collection(db, 'app_logs'), orderBy('timestamp','desc'));
-        const snap = await getDocs(q);
-        appLogsTable.innerHTML = '';
-        let c=0;
-        snap.forEach(d=>{
-          if(c++ > 10) return;
-          const l=d.data();
-          const when = l.timestamp ? (l.timestamp.seconds ? new Date(l.timestamp.seconds*1000).toLocaleString() : new Date(l.timestamp).toLocaleString()) : '-';
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${escapeHtml(l.action||'-')}</td><td>${escapeHtml(l.targetEmail||'-')}</td><td>${escapeHtml(l.performedBy||'-')}</td><td>${when}</td>`;
-          appLogsTable.appendChild(tr);
-        });
-      }catch(e){ console.error(e); }
+      appLogsList.innerHTML = '<div style="color:var(--muted)">Loading app logs...</div>';
+      const snap = await getDocs(query(collection(db, APP_LOGS_COLLECTION), orderBy('timestamp','desc')));
+      appLogsList.innerHTML = '';
+      snap.forEach(s => {
+        const d = s.data();
+        const date = d.timestamp && d.timestamp.seconds ? new Date(d.timestamp.seconds*1000).toLocaleString() : (d.timestamp ? new Date(d.timestamp).toLocaleString() : '-');
+        const el = document.createElement('div');
+        el.style.padding = '8px';
+        el.style.borderBottom = '1px solid rgba(255,255,255,0.02)';
+        el.innerHTML = `<div style="font-weight:700">${d.action}</div><div style="color:var(--muted); font-size:0.85rem">Target: ${d.targetEmail||'-'} — By: ${d.performedBy||'-'}</div><div style="color:var(--muted); font-size:0.85rem">${d.reason||''} • ${date}</div>`;
+        appLogsList.appendChild(el);
+      });
     }
 
-    // refresh button
-    refreshBtn.addEventListener('click', async ()=>{
-      showToast('Refreshing...', 'info', 1000);
-      if(typeof unsubscribeRequests === 'function') unsubscribeRequests();
-      setupRealtimeListener();
-      loadVisitsCount();
-      loadAdminLogs();
-      loadAppLogs();
+    // toggle new alerts (mute/unmute)
+    newRequestsToggle.addEventListener('click', () => {
+      alertsEnabled = !alertsEnabled;
+      newRequestsToggle.textContent = alertsEnabled ? '🔔 New Alerts' : '🔕 Alerts Off';
+      toast('Alerts ' + (alertsEnabled ? 'enabled' : 'muted'), 'info', 1200);
     });
 
-    // seed test
-    newRequestSeed.addEventListener('click', async () => {
-      try{
-        await addDoc(collection(db, 'serviceRequests'), {
-          clientName: 'Test Client ' + Math.floor(Math.random()*999),
-          email: 'test+'+Math.floor(Math.random()*999)+'@example.com',
-          phone: '+2136' + Math.floor(10000000 + Math.random()*89999999),
-          serviceTags: ['Graphic Design : Logo Design'],
-          projectDescription: 'This is a seeded test request.',
-          status: 'pending',
-          timestamp: new Date()
-        });
-        showToast('Test request added', 'success', 1800);
-      }catch(e){ console.error(e); showToast('Seed failed', 'warn'); }
-    });
+    // helper: when admin performs action, record app_log
+    async function recordAppLog(action, targetEmail='-', reason='') {
+      try{ await addDoc(collection(db, APP_LOGS_COLLECTION), { action, targetEmail, performedBy: currentUser?currentUser.email:'unknown', reason, timestamp: new Date() }); }
+      catch(e){ console.error('log fail', e); }
+    }
 
-    clearAllBtn.addEventListener('click', ()=> { requestsBody.innerHTML = ''; showToast('Display cleared', 'info', 1200); });
+    // initial UI state
+    document.getElementById('loginBox').style.display = 'block';
 
-    // ensure cleanup
-    window.addEventListener('beforeunload', ()=> { if(typeof unsubscribeRequests === 'function') unsubscribeRequests(); });
+    // accessibility: keyboard enter login
+    document.getElementById('adminPassword').addEventListener('keydown', e => { if(e.key === 'Enter') loginBtn.click(); });
 
   </script>
 </body>
 </html>
+
