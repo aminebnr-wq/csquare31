@@ -213,10 +213,8 @@
       <input id="adminPassword" type="password" placeholder="Password" />
       <div style="display:flex; gap:8px; justify-content:center; align-items:center; margin-top:8px;">
         <button id="loginBtn" class="btn primary">Login</button>
-        <button id="demoBtn" class="btn ghost" title="Fill demo">Demo</button>
       </div>
       <p id="errorMsg"></p>
-      <div style="font-size:0.85rem; color:var(--muted); margin-top:8px;">Super Admin has extra controls (logs & app logs).</div>
     </div>
 
     <!-- DASHBOARD -->
@@ -344,7 +342,6 @@
     const loginBox = document.getElementById('loginBox');
     const dashboard = document.getElementById('dashboard');
     const loginBtn = document.getElementById('loginBtn');
-    const demoBtn = document.getElementById('demoBtn');
     const logoutBtnTop = document.getElementById('logoutBtnTop');
     const errorMsg = document.getElementById('errorMsg');
 
@@ -411,11 +408,6 @@
       setTimeout(()=>{ t.style.opacity = '0'; t.addEventListener('transitionend', ()=> t.remove()); }, timeout);
     }
 
-    // ---------- AUTH ----------
-    demoBtn.addEventListener('click', () => {
-      document.getElementById('adminEmail').value = "admin@csquare3.club";
-      document.getElementById('adminPassword').value = "password123";
-    });
 
     loginBtn.addEventListener('click', async () => {
       const email = document.getElementById('adminEmail').value.trim();
@@ -802,4 +794,5 @@
   </script>
 </body>
 </html>
+
 
